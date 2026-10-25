@@ -28,3 +28,26 @@
 | **1. 지금 바빠서 이따 연락할게** | I have a meeting now, so I call back later. | I'm in the middle of a something. I will get back to you. | **I'm in the middle of something. I'll get back to you later.** |
 | **2. 죄송하지만 지금 회의 중이에요** | sorry, the schedual will be delay... | I'm afraid we have a meeting now. | **I'm afraid I'm in the middle of a meeting right now.** |
 | **3. 이슈 작업 중이고 곧 답변드릴게요** | I working on with issue. I search the solution. | I'm working on the issue, I'll get answer to you soon. | **I'm working on the issue. I'll get back to you soon.** |
+
+
+---
+
+## 🗓️ Day 2: 일정 확인 & 정중한 질문/안내하기 (2026-10-25 저녁)
+
+### 1. 오늘의 핵심 패턴 3가지
+1. **`We're supposed to + 동사원형` / `I'm supposed to ~`** (~하기로 되어 있어)
+   - `We're supposed to start the project tomorrow.` (우리 내일 그 프로젝트를 시작하기로 되어 있어. — *주의: `today`, `tomorrow`, `next week` 앞에는 `at`, `on`, `in` 같은 전치사를 붙이지 않음!*)
+2. **`Do you happen to + 동사원형 ~?`** (혹시 ~하시나요?)
+   - `Do you happen to know his phone number?` (혹시 그분 전화번호 아시나요?)
+   - `Do you happen to have time now?` (혹시 지금 시간 좀 있으신가요?)
+3. **`Feel free to + 동사원형` & `Let's go over + 명사`** (편하게 ~하세요 / 같이 검토해 봅시다)
+   - `Feel free to call me anytime.` (언제든 편하게 전화 주세요.)
+   - `Let's go over this schedule together.` (이 일정을 같이 검토해 봅시다. — *`review`도 맞지만 회화에서는 구동사 `go over`를 훨씬 자주 씀!*)
+
+### 2. Day 2 실전 퀴즈 & 교정 기록
+| 문제 | 내가 작성한 문장 | 교정 포인트 & 완성 문장 (Best) |
+| :--- | :--- | :--- |
+| **1. [복습] 보고서 작업 중이야, 이따 연락할게** | I'm in the middle of a report. I'll get back to you soon. | 👍 아주 잘하셨어요! `report`(보고서)는 행동이 아니라 물건이므로 `working on`을 넣어주면 완벽합니다.<br>👉 **I'm working on a report.** (또는 **I'm in the middle of working on a report.**) **I'll get back to you later.** |
+| **2. 우리 내일 프로젝트 시작하기로 되어 있어** | We're supposed to start the project at tomorrow. | ⚠️ `tomorrow`, `today`, `yesterday` 앞에는 전치사(`at`, `on`)를 쓰지 않아요! `at`만 빼면 100점!<br>👉 **We're supposed to start the project tomorrow.** |
+| **3. 혹시 그분 전화번호 아시나요?** | Do you happen to know his phone number? | 🎉 **100점 완벽합니다!** 토씨 하나 안 틀리고 정확해요! |
+| **4. 편하게 연락 주세요. 일정 같이 검토해 봅시다.** | Feel free to call me. we're supposed to review this schedule. | 💡 "~해 봅시다(제안)"는 **`Let's ~`**로 시작하고, '검토하다'는 구동사 **`go over`**를 쓰면 원어민 느낌이 확 삽니다!<br>👉 **Feel free to call me anytime. Let's go over this schedule.** |

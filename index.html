@@ -376,7 +376,8 @@
       <div class="progress-badge" id="progressBadge">암기 0 / 0</div>
     </div>
     <div class="filter-scroll" id="categoryChips">
-      <button class="chip active" data-cat="day1">🔥 Day 1 필수 (교정노트)</button>
+      <button class="chip active" data-cat="day2">🔥 Day 2 필수 (오늘 배운 것)</button>
+      <button class="chip" data-cat="day1">✅ Day 1 필수 (교정노트)</button>
       <button class="chip" data-cat="biz">💼 비즈니스 핵심 패턴</button>
       <button class="chip" data-cat="phrasal">🔄 원어민 필수 구동사</button>
       <button class="chip" data-cat="travel">✈️ 해외여행/스몰토크</button>
@@ -424,6 +425,65 @@
 
   <script>
     const cardsData = [
+      // Day 2 (New lesson & user's specific corrections)
+      {
+        id: "d2-1",
+        cat: "day2",
+        tag: "Day 2 교정 (전치사 주의!)",
+        ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
+        hint: "앞머리: We're supposed to ~ (주의: tomorrow 앞에 at 금지!)",
+        en: "We're supposed to start the project tomorrow.",
+        tip: "⚠️ today, tomorrow, yesterday, next week 앞에는 at, on, in 같은 전치사를 절대 붙이지 않습니다!",
+        before: "❌ 내 첫 문장: We're supposed to start the project at tomorrow."
+      },
+      {
+        id: "d2-2",
+        cat: "day2",
+        tag: "Day 2 완벽 정답 🎉",
+        ko: "혹시 그분 전화번호 아시나요?",
+        hint: "앞머리: Do you happen to ~?",
+        en: "Do you happen to know his phone number?",
+        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 비즈니스 질문이 됩니다."
+      },
+      {
+        id: "d2-3",
+        cat: "day2",
+        tag: "Day 2 교정 (제안 & 구동사)",
+        ko: "언제든 편하게 연락 주세요. 이 일정을 같이 검토해 봅시다.",
+        hint: "앞머리: Feel free to ~ / Let's go over ~",
+        en: "Feel free to call me anytime. Let's go over this schedule.",
+        tip: "'~해 봅시다'는 Let's ~! '검토하다'는 review도 맞지만 원어민 회화에서는 'go over(넘어가며 훑어보다)'를 훨씬 많이 써요!",
+        before: "💡 내 문장: we're supposed to review this schedule (검토하기로 되어 있다)"
+      },
+      {
+        id: "d2-4",
+        cat: "day2",
+        tag: "Day 1+2 복습 교정",
+        ko: "나 지금 보고서 작업 중이야. 이따가 다시 연락할게.",
+        hint: "앞머리: I'm working on ~ (또는 I'm in the middle of working on ~)",
+        en: "I'm working on a report. I'll get back to you later.",
+        tip: "meeting(회의)은 그 자체로 진행되는 일이라 'in the middle of a meeting'이 되지만, report(보고서)는 사물이므로 'working on a report'라고 해주는 게 자연스러워요!",
+        before: "💡 내 문장: I'm in the middle of a report. → working on 추가!"
+      },
+      {
+        id: "d2-5",
+        cat: "day2",
+        tag: "Day 2 응용",
+        ko: "제가 5시까지 그 파일을 보내기로 되어 있어요.",
+        hint: "앞머리: I'm supposed to ~ (~까지: by 5)",
+        en: "I'm supposed to send the file by 5.",
+        tip: "마감 기한 '~까지'는 by를 씁니다. (I'm supposed to + 동사원형)"
+      },
+      {
+        id: "d2-6",
+        cat: "day2",
+        tag: "Day 2 응용",
+        ko: "혹시 지금 시간 좀 있으신가요?",
+        hint: "앞머리: Do you happen to ~?",
+        en: "Do you happen to have time now?",
+        tip: "동료나 상사에게 조심스럽게 시간을 내달라고 물을 때 최고의 표현입니다."
+      },
+
       // Day 1 (User's customized corrections & core sentences)
       {
         id: "d1-1",
@@ -636,7 +696,7 @@
       }
     ];
 
-    let currentCategory = "day1";
+    let currentCategory = "day2";
     let currentIndex = 0;
     let slowToggle = false;
     let memorizedIds = JSON.parse(localStorage.getItem("jireumgil_memorized") || "[]");
