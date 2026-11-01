@@ -2,23 +2,35 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="지름길 비즈니스 영어" />
-  <title>지름길 비즈니스 영어 단어장</title>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="영어 단어장" />
+  <title>영어 단어장</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --card-border: #334155;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --accent: #38bdf8;
-      --accent-dark: #0284c7;
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --bg: #f4f6f9;
+      --surface: #ffffff;
+      --surface-sub: #f8fafc;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --primary: #2563eb;
+      --primary-soft: #eff6ff;
+      --primary-border: #bfdbfe;
+      --success: #16a34a;
+      --success-soft: #f0fdf4;
+      --success-border: #bbf7d0;
+      --warning-bg: #fffbeb;
+      --warning-text: #b45309;
+      --warning-border: #fde68a;
+      --danger-bg: #fef2f2;
+      --danger-text: #b91c1c;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
     }
 
     * {
@@ -29,50 +41,77 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
       background-color: var(--bg);
-      color: var(--text-main);
-      min-height: 100vh;
+      color: var(--text-primary);
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       max-width: 480px;
       margin: 0 auto;
-      padding-bottom: 84px;
+      padding-bottom: calc(76px + env(safe-area-inset-bottom));
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Top Bar */
     header {
-      padding: 20px 18px 12px;
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
+      background: var(--surface);
       position: sticky;
       top: 0;
-      z-index: 10;
-      border-bottom: 1px solid var(--card-border);
+      z-index: 20;
+      padding: 12px 16px 12px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .header-top {
+    .top-bar {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
 
-    .progress-badge {
-      font-size: 0.8rem;
-      background: #1e293b;
-      border: 1px solid var(--card-border);
-      padding: 4px 10px;
-      border-radius: 999px;
-      color: var(--accent);
-      font-weight: 600;
+    .mode-segmented {
+      display: inline-flex;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 10px;
     }
 
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .seg-btn.active {
+      background: var(--surface);
+      color: var(--text-primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      padding: 5px 11px;
+      border-radius: 999px;
+    }
+
+    /* Category Filter Chips */
     .filter-scroll {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 4px;
       scrollbar-width: none;
+      padding-bottom: 2px;
     }
     .filter-scroll::-webkit-scrollbar {
       display: none;
@@ -80,598 +119,613 @@
 
     .chip {
       white-space: nowrap;
-      padding: 7px 14px;
+      padding: 7px 13px;
       border-radius: 999px;
       font-size: 0.82rem;
       font-weight: 600;
-      background: var(--card-bg);
-      color: var(--text-sub);
-      border: 1px solid var(--card-border);
+      background: var(--surface-sub);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s ease;
     }
 
     .chip.active {
-      background: var(--accent);
-      color: #0f172a;
-      border-color: var(--accent);
+      background: var(--text-primary);
+      color: #ffffff;
+      border-color: var(--text-primary);
     }
 
+    /* Main Content */
     main {
       flex: 1;
       padding: 16px;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Flashcard Mode */
-    .flashcard-container {
+    .flashcard-view {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-    }
-
-    .card-counter {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-sub);
+      flex: 1;
+      gap: 14px;
     }
 
     .flashcard {
-      background: linear-gradient(145deg, #1e293b, #172033);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 28px 22px;
-      min-height: 310px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      min-height: 360px;
       cursor: pointer;
-      position: relative;
-      transition: transform 0.15s ease, border-color 0.2s ease;
-    }
-
-    .flashcard:active {
-      transform: scale(0.985);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .flashcard.revealed {
-      border-color: var(--accent);
+      border-color: var(--primary-border);
+    }
+
+    /* Card Top Header */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
     .card-tag {
-      display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 700;
-      color: var(--accent);
-      background: rgba(56, 189, 248, 0.12);
-      padding: 4px 10px;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 5px 10px;
       border-radius: 8px;
-      align-self: flex-start;
     }
 
-    .card-body {
-      margin: 20px 0;
+    .card-index {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Card Question Area */
+    .question-section {
+      margin-bottom: 16px;
+    }
+
+    .ko-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
     }
 
     .ko-sentence {
-      font-size: 1.3rem;
-      font-weight: 700;
-      line-height: 1.45;
-      color: var(--text-main);
-      margin-bottom: 16px;
+      font-size: 1.32rem;
+      font-weight: 800;
+      line-height: 1.48;
+      color: var(--text-primary);
+      word-break: keep-all;
+      margin-bottom: 14px;
     }
 
-    .hint-box {
-      font-size: 0.88rem;
-      color: var(--warning);
-      background: rgba(245, 158, 11, 0.1);
-      border-left: 3px solid var(--warning);
+    .hint-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--warning-text);
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
       padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 16px;
+      border-radius: 10px;
+      line-height: 1.4;
+      width: 100%;
     }
 
+    /* Card Answer Area */
     .answer-section {
       display: none;
       margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--card-border);
-      animation: fadeIn 0.25s ease;
+      padding-top: 18px;
+      border-top: 1.5px dashed var(--border);
+      animation: slideDown 0.2s ease-out;
     }
 
     .flashcard.revealed .answer-section {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .en-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
     .en-sentence {
-      font-size: 1.25rem;
+      font-size: 1.28rem;
       font-weight: 800;
-      color: #38bdf8;
-      line-height: 1.4;
-      margin-bottom: 10px;
+      color: var(--primary);
+      line-height: 1.42;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
     }
 
-    .tip-text {
-      font-size: 0.86rem;
-      color: #cbd5e1;
-      line-height: 1.5;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 10px 12px;
-      border-radius: 10px;
-    }
-
-    .before-box {
-      margin-top: 8px;
-      font-size: 0.8rem;
-      color: #fca5a5;
-      background: rgba(239, 68, 68, 0.1);
-      padding: 8px 10px;
-      border-radius: 8px;
-    }
-
-    .tap-guide {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--text-sub);
-    }
-
-    .flashcard.revealed .tap-guide {
-      display: none;
-    }
-
-    .action-row {
+    /* Dedicated Audio Control Strip Inside Card */
+    .audio-bar {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .btn {
-      border: none;
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 0.95rem;
+    .audio-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface-sub);
+      color: var(--text-primary);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: opacity 0.15s, transform 0.1s;
+      transition: background 0.15s, transform 0.1s;
     }
 
-    .btn:active {
+    .audio-btn:active {
       transform: scale(0.97);
+      background: #e2e8f0;
     }
 
-    .btn-tts {
-      background: #334155;
-      color: var(--text-main);
-      grid-column: span 2;
+    .tip-box {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      background: var(--surface-sub);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      line-height: 1.55;
+      word-break: keep-all;
     }
 
-    .btn-nav {
-      background: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
+    .before-box {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--danger-text);
+      background: var(--danger-bg);
+      padding: 9px 12px;
+      border-radius: 10px;
+      line-height: 1.45;
     }
 
-    .btn-check {
-      background: var(--card-bg);
-      color: var(--success);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      grid-column: span 2;
+    /* Card Footer Prompt */
+    .reveal-prompt {
+      margin-top: 20px;
+      padding: 13px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
 
-    .btn-check.memorized {
-      background: var(--success);
-      color: #052e16;
+    .flashcard.revealed .reveal-prompt {
+      display: none;
     }
 
     /* List Mode */
-    .list-container {
+    .list-view {
       display: none;
       flex-direction: column;
       gap: 12px;
     }
 
-    .list-item {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+    .list-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 16px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .list-item.memorized {
-      border-color: rgba(34, 197, 94, 0.45);
-      opacity: 0.78;
+    .list-card.memorized {
+      background: #f8fafc;
+      border-color: var(--success-border);
     }
 
-    .list-top {
+    .list-card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .list-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-sub);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .icon-btn.done {
+      background: var(--success-soft);
+      color: var(--success);
+      border-color: var(--success-border);
+    }
+
+    .list-ko {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.4;
     }
 
     .list-en {
       font-size: 1.05rem;
       font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 4px;
-      line-height: 1.35;
-    }
-
-    .list-ko {
-      font-size: 0.92rem;
-      color: var(--text-main);
+      color: var(--primary);
       margin-bottom: 8px;
-    }
-
-    .list-tip {
-      font-size: 0.8rem;
-      color: var(--text-sub);
       line-height: 1.4;
     }
 
-    .mini-btns {
-      display: flex;
-      gap: 6px;
-    }
-
-    .mini-btn {
-      background: #334155;
-      border: none;
-      color: var(--text-main);
-      padding: 5px 10px;
+    .list-tip {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      background: var(--surface-sub);
+      padding: 8px 10px;
       border-radius: 8px;
-      font-size: 0.78rem;
-      cursor: pointer;
+      line-height: 1.45;
     }
 
-    /* Bottom Navigation */
-    .bottom-nav {
+    /* Fixed Bottom Control Bar (Flashcard Mode) */
+    .bottom-dock {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       max-width: 480px;
       margin: 0 auto;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px calc(12px + env(safe-area-inset-bottom));
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 10px 16px 20px;
+      grid-template-columns: 88px 1fr 88px;
       gap: 10px;
-      z-index: 20;
+      z-index: 30;
     }
 
-    .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-sub);
-      padding: 10px;
-      border-radius: 12px;
+    .dock-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-primary);
+      border-radius: 14px;
+      height: 48px;
       font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s ease;
     }
 
-    .tab-btn.active {
-      background: var(--card-bg);
-      color: var(--accent);
-      border-color: var(--card-border);
+    .dock-btn:active {
+      transform: scale(0.97);
+      background: #f1f5f9;
+    }
+
+    .dock-btn-check {
+      background: var(--surface);
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-strong);
+    }
+
+    .dock-btn-check.memorized {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-top">
-      <div class="progress-badge" id="progressBadge">암기 0 / 0</div>
+    <div class="top-bar">
+      <div class="mode-segmented">
+        <button class="seg-btn active" id="tabFlash" onclick="switchMode('flash')">카드 학습</button>
+        <button class="seg-btn" id="tabList" onclick="switchMode('list')">전체 목록</button>
+      </div>
+      <div class="progress-pill" id="progressBadge">암기 0 / 0</div>
     </div>
+
     <div class="filter-scroll" id="categoryChips">
-      <button class="chip active" data-cat="day3">🔥 Day 3 필수 (오늘 배운 것)</button>
-      <button class="chip" data-cat="day2">✅ Day 2 필수</button>
-      <button class="chip" data-cat="day1">✅ Day 1 필수</button>
-      <button class="chip" data-cat="biz">💼 비즈니스 핵심 패턴</button>
-      <button class="chip" data-cat="phrasal">🔄 원어민 필수 구동사</button>
-      <button class="chip" data-cat="travel">✈️ 해외여행/스몰토크</button>
-      <button class="chip" data-cat="all">📚 전체 보기</button>
+      <button class="chip active" data-cat="day3">Day 3 (오늘)</button>
+      <button class="chip" data-cat="day2">Day 2</button>
+      <button class="chip" data-cat="day1">Day 1</button>
+      <button class="chip" data-cat="biz">비즈니스 패턴</button>
+      <button class="chip" data-cat="phrasal">필수 구동사</button>
+      <button class="chip" data-cat="travel">여행·스몰토크</button>
+      <button class="chip" data-cat="all">전체</button>
     </div>
   </header>
 
   <main>
     <!-- Flashcard View -->
-    <div class="flashcard-container" id="flashcardView">
-      <div class="card-counter" id="cardCounter">1 / 6</div>
-
+    <div class="flashcard-view" id="flashcardView">
       <div class="flashcard" id="flashcard" onclick="toggleReveal()">
         <div>
-          <span class="card-tag" id="cardTag">Day 1 핵심 교정</span>
-          <div class="card-body">
-            <div class="ko-sentence" id="koSentence">나 지금 뭐 좀 처리하는 중이야. 이따가 다시 연락할게.</div>
-            <div class="hint-box" id="hintBox">💡 앞머리 힌트: I'm in the middle of ~ / I'll get back ~</div>
-            <div class="answer-section">
-              <div class="en-sentence" id="enSentence">I'm in the middle of something. I'll get back to you later.</div>
-              <div class="tip-text" id="tipText">something 앞에는 'a'를 붙이지 않아요! '다시 연락/답변하다'는 무조건 get back to you!</div>
-              <div class="before-box" id="beforeBox" style="display:none;"></div>
+          <div class="card-header">
+            <span class="card-tag" id="cardTag">Day 3</span>
+            <span class="card-index" id="cardCounter">1 / 6</span>
+          </div>
+
+          <div class="question-section">
+            <div class="ko-label">한국어 문장</div>
+            <div class="ko-sentence" id="koSentence">나 이제 막 이메일을 보내려던 참이야.</div>
+            <div class="hint-pill" id="hintBox">💡 힌트: I'm about to ~</div>
+          </div>
+
+          <div class="answer-section">
+            <div class="en-label">영어 표현</div>
+            <div class="en-sentence" id="enSentence">I'm about to send the email.</div>
+
+            <div class="audio-bar" onclick="event.stopPropagation()">
+              <button class="audio-btn" onclick="speakCurrent(0.96)">🔊 보통 속도</button>
+              <button class="audio-btn" onclick="speakCurrent(0.75)">🐢 느린 속도</button>
             </div>
+
+            <div class="tip-box" id="tipText">상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 최고의 패턴입니다.</div>
+            <div class="before-box" id="beforeBox" style="display:none;"></div>
           </div>
         </div>
-        <div class="tap-guide">👆 카드를 터치하면 영어 정답이 보입니다</div>
-      </div>
 
-      <div class="action-row">
-        <button class="btn btn-tts" onclick="speakCurrent(event)">🔊 원어민 발음 듣기 (느리게/보통)</button>
-        <button class="btn btn-nav" onclick="prevCard()">⬅️ 이전 문장</button>
-        <button class="btn btn-nav" onclick="nextCard()">다음 문장 ➡️</button>
-        <button class="btn btn-check" id="memorizeBtn" onclick="toggleMemorize()">✅ 외웠어요 체크</button>
+        <div class="reveal-prompt">👆 카드를 터치해서 정답 확인하기</div>
       </div>
     </div>
 
     <!-- List View -->
-    <div class="list-container" id="listView"></div>
+    <div class="list-view" id="listView"></div>
   </main>
 
-  <nav class="bottom-nav">
-    <button class="tab-btn active" id="tabFlash" onclick="switchMode('flash')">🗂️ 1초 말하기 카드</button>
-    <button class="tab-btn" id="tabList" onclick="switchMode('list')">📋 전체 문장 리스트</button>
-  </nav>
+  <!-- Bottom Navigation Bar for Flashcard Mode -->
+  <div class="bottom-dock" id="bottomDock">
+    <button class="dock-btn" onclick="prevCard()">‹ 이전</button>
+    <button class="dock-btn dock-btn-check" id="memorizeBtn" onclick="toggleMemorize()">✓ 암기 완료 체크</button>
+    <button class="dock-btn" onclick="nextCard()">다음 ›</button>
+  </div>
 
   <script>
     const cardsData = [
-      // Day 3 (New lesson & user's specific corrections)
+      // Day 3
       {
         id: "d3-1",
         cat: "day3",
-        tag: "Day 3 완벽 정답 🎉",
+        tag: "Day 3 · 완벽 정답",
         ko: "나 이제 막 이메일을 보내려던 참이야.",
         hint: "앞머리: I'm about to ~",
         en: "I'm about to send the email.",
-        tip: "상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 최고의 패턴입니다."
+        tip: "상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 패턴입니다."
       },
       {
         id: "d3-2",
         cat: "day3",
-        tag: "Day 3 교정 (스펠링 체크)",
+        tag: "Day 3 · 스펠링 주의",
         ko: "혹시 모르니까, 꼭 두 번(재차) 확인해 주세요.",
         hint: "앞머리: Just in case, make sure to ~",
         en: "Just in case, make sure to double-check.",
-        tip: "구조는 100점! '두 번'은 double(d-o-u-b-l-e) 스펠링만 챙겨주세요.",
-        before: "💡 내 문장: Just in case Make sure to duble-check."
+        tip: "어순은 100점! '두 번'은 double (d-o-u-b-l-e) 스펠링만 챙겨주세요.",
+        before: "내 답안: Just in case Make sure to duble-check."
       },
       {
         id: "d3-3",
         cat: "day3",
-        tag: "Day 3 완벽 정답 🎉",
+        tag: "Day 3 · 완벽 정답",
         ko: "오늘은 이쯤에서 마무리합시다.",
         hint: "앞머리: Let's wrap it up ~",
         en: "Let's wrap it up for today.",
-        tip: "회의나 업무를 끝낼 때 finish 대신 'wrap it up(포장하듯 깔끔히 마무리하다)'을 쓰면 원어민처럼 들립니다."
+        tip: "회의나 업무를 끝낼 때 finish 대신 'wrap it up (포장하듯 깔끔히 마무리하다)'을 쓰면 훨씬 자연스럽습니다."
       },
       {
         id: "d3-4",
         cat: "day3",
-        tag: "Day 3 세트 표현 (퇴근)",
+        tag: "Day 3 · 퇴근 표현",
         ko: "전 오늘 업무는 여기까지 할게요 (퇴근할게요).",
         hint: "앞머리: I'm gonna call it ~",
         en: "I'm gonna call it a day.",
-        tip: "Let's wrap it up과 세트로 매일 쓰이는 퇴근 인사입니다!"
+        tip: "Let's wrap it up과 세트로 매일 쓰이는 원어민 퇴근 인사입니다."
       },
       {
         id: "d3-5",
         cat: "day3",
-        tag: "Day 2 복습 교정 (d 주의!)",
+        tag: "Day 2 복습 · d 주의",
         ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
         hint: "앞머리: We're supposed to ~",
         en: "We're supposed to start the project tomorrow.",
-        tip: "발음할 때 '서포즈투'로 들려서 d를 빼먹기 쉽지만, 글로 쓸 때는 꼭 supposed(d 포함!)로 적어주세요. tomorrow 앞에 at을 뺀 건 정말 잘하셨어요!",
-        before: "💡 내 문장: We're suppose to start the project tomorrorw."
+        tip: "발음은 '서포즈투'로 들리지만, 글로 쓸 때는 꼭 supposed (d 포함)로 적어주세요!",
+        before: "내 답안: We're suppose to start the project tomorrorw."
       },
       {
         id: "d3-6",
         cat: "day3",
-        tag: "Day 3 응용",
+        tag: "Day 3 · 응용",
         ko: "나 이제 막 회의에 들어가려던 참이야.",
         hint: "앞머리: I'm about to ~",
         en: "I'm about to join the meeting.",
         tip: "회의에 참석하다/들어가다는 'join the meeting'을 가장 많이 씁니다."
       },
 
-      // Day 2 (New lesson & user's specific corrections)
+      // Day 2
       {
         id: "d2-1",
         cat: "day2",
-        tag: "Day 2 교정 (전치사 주의!)",
+        tag: "Day 2 · 전치사 주의",
         ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
-        hint: "앞머리: We're supposed to ~ (주의: tomorrow 앞에 at 금지!)",
+        hint: "앞머리: We're supposed to ~ (tomorrow 앞에 at 금지)",
         en: "We're supposed to start the project tomorrow.",
-        tip: "⚠️ today, tomorrow, yesterday, next week 앞에는 at, on, in 같은 전치사를 절대 붙이지 않습니다!",
-        before: "❌ 내 첫 문장: We're supposed to start the project at tomorrow."
+        tip: "today, tomorrow, yesterday, next week 앞에는 at, on, in 같은 전치사를 붙이지 않습니다.",
+        before: "내 첫 문장: We're supposed to start the project at tomorrow."
       },
       {
         id: "d2-2",
         cat: "day2",
-        tag: "Day 2 완벽 정답 🎉",
+        tag: "Day 2 · 완벽 정답",
         ko: "혹시 그분 전화번호 아시나요?",
         hint: "앞머리: Do you happen to ~?",
         en: "Do you happen to know his phone number?",
-        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 비즈니스 질문이 됩니다."
+        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 질문이 됩니다."
       },
       {
         id: "d2-3",
         cat: "day2",
-        tag: "Day 2 교정 (제안 & 구동사)",
+        tag: "Day 2 · 제안 & 구동사",
         ko: "언제든 편하게 연락 주세요. 이 일정을 같이 검토해 봅시다.",
         hint: "앞머리: Feel free to ~ / Let's go over ~",
         en: "Feel free to call me anytime. Let's go over this schedule.",
-        tip: "'~해 봅시다'는 Let's ~! '검토하다'는 review도 맞지만 원어민 회화에서는 'go over(넘어가며 훑어보다)'를 훨씬 많이 써요!",
-        before: "💡 내 문장: we're supposed to review this schedule (검토하기로 되어 있다)"
+        tip: "'~해 봅시다'는 Let's ~! '검토하다'는 회화에서 구동사 'go over(훑어보다)'를 훨씬 자주 씁니다.",
+        before: "내 문장: we're supposed to review this schedule."
       },
       {
         id: "d2-4",
         cat: "day2",
-        tag: "Day 1+2 복습 교정",
+        tag: "Day 2 · 복습 교정",
         ko: "나 지금 보고서 작업 중이야. 이따가 다시 연락할게.",
-        hint: "앞머리: I'm working on ~ (또는 I'm in the middle of working on ~)",
+        hint: "앞머리: I'm working on ~",
         en: "I'm working on a report. I'll get back to you later.",
-        tip: "meeting(회의)은 그 자체로 진행되는 일이라 'in the middle of a meeting'이 되지만, report(보고서)는 사물이므로 'working on a report'라고 해주는 게 자연스러워요!",
-        before: "💡 내 문장: I'm in the middle of a report. → working on 추가!"
+        tip: "report(보고서)는 사물이므로 'working on a report'라고 해주는 게 가장 자연스럽습니다.",
+        before: "내 문장: I'm in the middle of a report. → working on 추가!"
       },
       {
         id: "d2-5",
         cat: "day2",
-        tag: "Day 2 응용",
+        tag: "Day 2 · 응용",
         ko: "제가 5시까지 그 파일을 보내기로 되어 있어요.",
         hint: "앞머리: I'm supposed to ~ (~까지: by 5)",
         en: "I'm supposed to send the file by 5.",
-        tip: "마감 기한 '~까지'는 by를 씁니다. (I'm supposed to + 동사원형)"
+        tip: "마감 기한 '~까지'는 전치사 by를 씁니다."
       },
       {
         id: "d2-6",
         cat: "day2",
-        tag: "Day 2 응용",
+        tag: "Day 2 · 응용",
         ko: "혹시 지금 시간 좀 있으신가요?",
         hint: "앞머리: Do you happen to ~?",
         en: "Do you happen to have time now?",
-        tip: "동료나 상사에게 조심스럽게 시간을 내달라고 물을 때 최고의 표현입니다."
+        tip: "동료나 상사에게 조심스럽게 시간을 내달라고 물을 때 쓰는 표현입니다."
       },
 
-      // Day 1 (User's customized corrections & core sentences)
+      // Day 1
       {
         id: "d1-1",
         cat: "day1",
-        tag: "Day 1 교정 1번",
+        tag: "Day 1 · 핵심 교정",
         ko: "나 지금 뭐 좀 처리하는 중이야. 이따가 다시 연락할게.",
         hint: "앞머리: I'm in the middle of ~ / I'll ~",
         en: "I'm in the middle of something. I'll get back to you later.",
-        tip: "⚠️ something 앞에는 'a'를 붙이지 않습니다! '다시 연락하다'는 전화/메일 모두 get back to you!",
-        before: "❌ 내 첫 문장: I'm in the middle of a something."
+        tip: "something 앞에는 'a'를 붙이지 않습니다! '다시 연락하다'는 전화/메일 모두 get back to you!",
+        before: "내 첫 문장: I'm in the middle of a something."
       },
       {
         id: "d1-2",
         cat: "day1",
-        tag: "Day 1 교정 2번",
+        tag: "Day 1 · 핵심 교정",
         ko: "죄송하지만 제가 지금은 한창 회의 중입니다.",
         hint: "앞머리: I'm afraid ~ / I'm in the middle of ~",
         en: "I'm afraid I'm in the middle of a meeting right now.",
-        tip: "내 잘못이 아닌데 아쉬운 소식을 전할 땐 Sorry 대신 'I'm afraid ~'로 시작하면 훨씬 프로페셔널합니다.",
-        before: "💡 I'm afraid we have a meeting now도 좋지만 '한창 회의 중'은 in the middle of!"
+        tip: "내 잘못이 아닌데 아쉬운 소식을 전할 땐 Sorry 대신 'I'm afraid ~'로 시작하면 프로페셔널합니다."
       },
       {
         id: "d1-3",
         cat: "day1",
-        tag: "Day 1 교정 3번",
+        tag: "Day 1 · 핵심 교정",
         ko: "제가 지금 그 이슈를 확인(작업) 중입니다. 곧 다시 답변드릴게요.",
         hint: "앞머리: I'm working on ~ / I'll get back ~",
         en: "I'm working on the issue. I'll get back to you soon.",
-        tip: "⚠️ '답변을 주다'라고 answer를 넣지 않아도, get back to you 자체에 '결과/답변을 가지고 다시 연락하다'라는 뜻이 다 들어있어요!",
-        before: "❌ 내 첫 문장: I'll get answer to you soon."
+        tip: "get back to you 자체에 '결과/답변을 가지고 다시 연락하다'라는 뜻이 모두 들어있습니다.",
+        before: "내 첫 문장: I'll get answer to you soon."
       },
       {
         id: "d1-4",
         cat: "day1",
-        tag: "Day 1 진단 교정",
+        tag: "Day 1 · 진단 교정",
         ko: "죄송하지만 그 일정은 다음 주로 미뤄야(연기해야) 할 것 같아요.",
         hint: "앞머리: I'm afraid we have to ~ (미루다: put off)",
         en: "I'm afraid we have to put off the schedule until next week.",
-        tip: "일정을 미루다는 'put off' (멀리 떨어뜨려 놓다), '~까지'는 with가 아니라 'until'을 씁니다.",
-        before: "❌ 내 첫 문장: sorry, the schedual will be delay with next week."
+        tip: "일정을 미루다는 구동사 'put off', '~까지'는 with가 아니라 'until'을 씁니다.",
+        before: "내 첫 문장: sorry, the schedual will be delay with next week."
       },
       {
         id: "d1-5",
         cat: "day1",
-        tag: "Day 1 진단 교정",
+        tag: "Day 1 · 진단 교정",
         ko: "제가 어떻게든 해결책을 찾아볼게요.",
         hint: "앞머리: I'll figure ~",
-        en: "I'll figure out a solution. (I'll figure something out.)",
+        en: "I'll figure out a solution.",
         tip: "search는 단순 검색! 머리를 굴려 해결책을 찾아내다는 구동사 'figure out'을 씁니다.",
-        before: "❌ 내 첫 문장: I search the solution."
+        before: "내 첫 문장: I search the solution."
       },
       {
         id: "d1-6",
         cat: "day1",
-        tag: "Day 1 응용",
+        tag: "Day 1 · 응용",
         ko: "나 지금 보고서 작성하는 중이야.",
         hint: "앞머리: I'm in the middle of working on ~",
         en: "I'm in the middle of working on a report.",
-        tip: "in the middle of 뒤에 동사를 넣을 땐 -ing 형태(working on)로 이어주면 됩니다."
+        tip: "in the middle of 뒤에 동사를 넣을 땐 -ing 형태(working on)로 이어줍니다."
       },
 
-      // Business Patterns (from Shorts)
+      // Business Patterns
       {
         id: "biz-1",
         cat: "biz",
-        tag: "비즈니스 필수 (약속/예정)",
+        tag: "비즈니스 · 약속/예정",
         ko: "우린 다음 주에 가기로 되어 있어. / 나 6시까지 거기 가야 해.",
         hint: "앞머리: We're supposed to ~ / I'm supposed to ~",
         en: "We're supposed to go next week. / I'm supposed to be there by 6.",
-        tip: "규칙이나 약속으로 '~하기로 되어 있다'고 말할 때 비즈니스 1순위 패턴입니다."
+        tip: "규칙이나 약속으로 '~하기로 되어 있다'고 말할 때 쓰는 1순위 패턴입니다."
       },
       {
         id: "biz-2",
         cat: "biz",
-        tag: "비즈니스 필수 (퇴근/마무리)",
-        ko: "오늘은 여기까지 할게 (오늘 업무는 이만 마무리할게).",
-        hint: "앞머리: I'm gonna call it ~",
-        en: "I'm gonna call it a day. (Let's wrap it up for today.)",
-        tip: "퇴근하거나 회의를 끝낼 때 원어민들이 매일 쓰는 표현! 'call it a day' 또는 'wrap it up'."
+        tag: "비즈니스 · 의견 조율",
+        ko: "하룻밤 자면서 곰곰이 생각해 볼게.",
+        hint: "앞머리: I'm gonna sleep ~ / Let me think ~",
+        en: "I'm gonna sleep on it. / Let me think it over.",
+        tip: "중요한 결정을 바로 내리지 않고 '신중히 고민해 보겠다'고 할 때 쓰는 표현입니다."
       },
       {
         id: "biz-3",
         cat: "biz",
-        tag: "비즈니스 필수 (정중한 질문)",
-        ko: "혹시 그녀의 전화번호 아시나요? / 혹시 여기서 일하시나요?",
-        hint: "앞머리: Do you happen to ~?",
-        en: "Do you happen to know her phone number? / Do you happen to work here?",
-        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 질문이 됩니다."
-      },
-      {
-        id: "biz-4",
-        cat: "biz",
-        tag: "비즈니스 필수 (안내)",
-        ko: "언제든 편하게 전화 주세요. / 편하게 앉으세요.",
-        hint: "앞머리: Feel free to ~",
-        en: "Feel free to call me anytime. / Feel free to sit down.",
-        tip: "이메일 끝인사나 회의 시작할 때 '부담 없이 편하게 ~하세요'라는 뜻으로 매일 쓰입니다."
-      },
-      {
-        id: "biz-5",
-        cat: "biz",
-        tag: "비즈니스 필수 (대비/당부)",
-        ko: "혹시 모르니까 한 번 더 물어봐. / 두 번(재차) 확인해.",
-        hint: "앞머리: Just in case, ~ / Make sure to ~",
-        en: "Just in case, ask one more time. / Make sure to double-check.",
-        tip: "Just in case (만약을 대비해 혹시 모르니까), Make sure to (반드시 ~해라)."
-      },
-      {
-        id: "biz-6",
-        cat: "biz",
-        tag: "비즈니스 필수 (진행 직전)",
-        ko: "이제 막 너에게 전화하려던 참이었어.",
-        hint: "앞머리: I was about to ~ / I'm about to ~",
-        en: "I'm about to call you. (I was just about to call you.)",
-        tip: "'이제 막 ~하려고 하다'는 I'm about to + 동사원형!"
-      },
-      {
-        id: "biz-7",
-        cat: "biz",
-        tag: "비즈니스 필수 (의견 조율)",
-        ko: "하룻밤 자면서 곰곰이 생각해 볼게.",
-        hint: "앞머리: I'm gonna sleep ~ / Let me think ~",
-        en: "I'm gonna sleep on it. / Let me think it over.",
-        tip: "중요한 결정을 바로 내리지 않고 '신중히 고민해 보겠다'고 할 때 쓰는 고급 표현입니다."
-      },
-      {
-        id: "biz-8",
-        cat: "biz",
-        tag: "비즈니스 필수 (이해/공감)",
+        tag: "비즈니스 · 이해/공감",
         ko: "네 말뜻(요점)이 뭔지 알겠어. / 내 말이 바로 그 말이야.",
         hint: "앞머리: I get your ~ / That's what ~",
         en: "I get your point. / That's what I mean.",
@@ -682,7 +736,7 @@
       {
         id: "phr-1",
         cat: "phrasal",
-        tag: "구동사 OVER (넘어서)",
+        tag: "구동사 · OVER",
         ko: "이 자료 같이 검토해 봅시다.",
         hint: "앞머리: Let's go ~",
         en: "Let's go over this.",
@@ -691,7 +745,7 @@
       {
         id: "phr-2",
         cat: "phrasal",
-        tag: "구동사 DOWN (감소/압축)",
+        tag: "구동사 · DOWN",
         ko: "핵심만 요약해 봅시다. / 선택지를 좀 추려(좁혀) 봅시다.",
         hint: "요약하다: boil down / 좁히다: narrow down",
         en: "Let's boil it down. / Let's narrow down the list.",
@@ -700,7 +754,7 @@
       {
         id: "phr-3",
         cat: "phrasal",
-        tag: "구동사 ON / OFF",
+        tag: "구동사 · ON / OFF",
         ko: "내가 그거 잘 지켜볼게. / 몇 시에 퇴근하세요?",
         hint: "지켜보다: keep an eye on / 퇴근하다: get off work",
         en: "I'm gonna keep an eye on it. / What time do you get off work?",
@@ -709,7 +763,7 @@
       {
         id: "phr-4",
         cat: "phrasal",
-        tag: "구동사 UP (완전히)",
+        tag: "구동사 · UP",
         ko: "그 얘기는 나중에 꺼낼게. / 내가 그거 꼭 만회(보상)할게.",
         hint: "꺼내다: bring up / 만회하다: make up for",
         en: "I'm gonna bring it up later. / I'll make up for it.",
@@ -720,29 +774,29 @@
       {
         id: "trv-1",
         cat: "travel",
-        tag: "스몰토크 / 동의",
+        tag: "스몰토크 · 동의",
         ko: "나도 더 들어보고 싶어! / 나도 같이 갈래! (콜!)",
         hint: "앞머리: I'm game to ~",
         en: "I'm game to hear more. / I'm game to go with you.",
-        tip: "I'm game = '나는 게임이다(X)' → 재밌는 일에 나도 끼겠다는 뜻으로 '완전 찬성/나도 할래!'"
+        tip: "I'm game = 재밌는 일에 나도 끼겠다는 뜻으로 '완전 찬성/나도 할래!'"
       },
       {
         id: "trv-2",
         cat: "travel",
-        tag: "스몰토크 / 성향",
+        tag: "스몰토크 · 성향",
         ko: "나는 일찍 일어나는 편이야. / 난 아침을 거르는 편이야.",
         hint: "앞머리: I tend to ~",
         en: "I tend to wake up early. / I tend to skip breakfast.",
-        tip: "내 평소 습관이나 성향을 말할 때 'I tend to + 동사'를 쓰면 아주 자연스럽습니다."
+        tip: "내 평소 습관이나 성향을 말할 때 'I tend to + 동사'를 쓰면 자연스럽습니다."
       },
       {
         id: "trv-3",
         cat: "travel",
-        tag: "원어민 퇴근/귀가 표현",
+        tag: "퇴근/귀가 표현",
         ko: "나 이제 집에 갈 거야 (집으로 출발할게).",
-        hint: "go home 대신 동사 head 쓰기!",
+        hint: "go home 대신 동사 head 쓰기",
         en: "I'm gonna head home now.",
-        tip: "🔊 발음: '암거너 헤롬나우' (head home의 h가 약해져서 헤롬으로 연음됨!)"
+        tip: "발음: '암거너 헤롬나우' (head home의 h가 약해져서 헤롬으로 연음됨)"
       },
       {
         id: "trv-4",
@@ -757,7 +811,6 @@
 
     let currentCategory = "day3";
     let currentIndex = 0;
-    let slowToggle = false;
     let memorizedIds = JSON.parse(localStorage.getItem("jireumgil_memorized") || "[]");
 
     function getFilteredCards() {
@@ -791,7 +844,7 @@
       const beforeEl = document.getElementById("beforeBox");
       if (card.before) {
         beforeEl.style.display = "block";
-        beforeEl.textContent = card.before;
+        beforeEl.textContent = `✍️ ${card.before}`;
       } else {
         beforeEl.style.display = "none";
       }
@@ -800,10 +853,10 @@
       const isMem = memorizedIds.includes(card.id);
       if (isMem) {
         memBtn.classList.add("memorized");
-        memBtn.textContent = "🎉 외움 완료! (터치시 해제)";
+        memBtn.textContent = "✓ 암기 완료됨";
       } else {
         memBtn.classList.remove("memorized");
-        memBtn.textContent = "✅ 외웠어요 체크";
+        memBtn.textContent = "✓ 암기 완료 체크";
       }
 
       updateProgress();
@@ -845,7 +898,6 @@
         return;
       }
       window.speechSynthesis.cancel();
-      // Remove parenthetical notes if any
       const cleanText = text.replace(/\(.*?\)/g, "").replace(/\//g, ". ");
       const utter = new SpeechSynthesisUtterance(cleanText);
       utter.lang = "en-US";
@@ -853,13 +905,10 @@
       window.speechSynthesis.speak(utter);
     }
 
-    function speakCurrent(e) {
-      if (e) e.stopPropagation();
+    function speakCurrent(rate) {
       const list = getFilteredCards();
       const card = list[currentIndex];
       if (!card) return;
-      const rate = slowToggle ? 0.78 : 0.96;
-      slowToggle = !slowToggle;
       speakText(card.en, rate);
     }
 
@@ -871,17 +920,17 @@
       list.forEach((card) => {
         const isMem = memorizedIds.includes(card.id);
         const div = document.createElement("div");
-        div.className = "list-item" + (isMem ? " memorized" : "");
+        div.className = "list-card" + (isMem ? " memorized" : "");
         div.innerHTML = `
-          <div class="list-top">
+          <div class="list-card-top">
             <span class="card-tag">${card.tag}</span>
-            <div class="mini-btns">
-              <button class="mini-btn" onclick="speakText('${card.en.replace(/'/g, "\\'")}', 0.95)">🔊 발음</button>
-              <button class="mini-btn" onclick="toggleMemById('${card.id}')">${isMem ? "🎉 완료" : "✅ 체크"}</button>
+            <div class="list-actions">
+              <button class="icon-btn" onclick="speakText('${card.en.replace(/'/g, "\\'")}', 0.95)">🔊 듣기</button>
+              <button class="icon-btn ${isMem ? "done" : ""}" onclick="toggleMemById('${card.id}')">${isMem ? "✓ 완료" : "암기 체크"}</button>
             </div>
           </div>
-          <div class="list-en">${card.en}</div>
           <div class="list-ko">${card.ko}</div>
+          <div class="list-en">${card.en}</div>
           <div class="list-tip">${card.tip}</div>
         `;
         container.appendChild(div);
@@ -900,17 +949,20 @@
     function switchMode(mode) {
       const fView = document.getElementById("flashcardView");
       const lView = document.getElementById("listView");
+      const dock = document.getElementById("bottomDock");
       const tFlash = document.getElementById("tabFlash");
       const tList = document.getElementById("tabList");
 
       if (mode === "flash") {
         fView.style.display = "flex";
         lView.style.display = "none";
+        dock.style.display = "grid";
         tFlash.classList.add("active");
         tList.classList.remove("active");
       } else {
         fView.style.display = "none";
         lView.style.display = "flex";
+        dock.style.display = "none";
         tFlash.classList.remove("active");
         tList.classList.add("active");
         renderList();
@@ -928,7 +980,6 @@
       });
     });
 
-    // Initial render
     renderCard();
   </script>
 </body>
