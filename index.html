@@ -376,8 +376,9 @@
       <div class="progress-badge" id="progressBadge">암기 0 / 0</div>
     </div>
     <div class="filter-scroll" id="categoryChips">
-      <button class="chip active" data-cat="day2">🔥 Day 2 필수 (오늘 배운 것)</button>
-      <button class="chip" data-cat="day1">✅ Day 1 필수 (교정노트)</button>
+      <button class="chip active" data-cat="day3">🔥 Day 3 필수 (오늘 배운 것)</button>
+      <button class="chip" data-cat="day2">✅ Day 2 필수</button>
+      <button class="chip" data-cat="day1">✅ Day 1 필수</button>
       <button class="chip" data-cat="biz">💼 비즈니스 핵심 패턴</button>
       <button class="chip" data-cat="phrasal">🔄 원어민 필수 구동사</button>
       <button class="chip" data-cat="travel">✈️ 해외여행/스몰토크</button>
@@ -425,6 +426,64 @@
 
   <script>
     const cardsData = [
+      // Day 3 (New lesson & user's specific corrections)
+      {
+        id: "d3-1",
+        cat: "day3",
+        tag: "Day 3 완벽 정답 🎉",
+        ko: "나 이제 막 이메일을 보내려던 참이야.",
+        hint: "앞머리: I'm about to ~",
+        en: "I'm about to send the email.",
+        tip: "상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 최고의 패턴입니다."
+      },
+      {
+        id: "d3-2",
+        cat: "day3",
+        tag: "Day 3 교정 (스펠링 체크)",
+        ko: "혹시 모르니까, 꼭 두 번(재차) 확인해 주세요.",
+        hint: "앞머리: Just in case, make sure to ~",
+        en: "Just in case, make sure to double-check.",
+        tip: "구조는 100점! '두 번'은 double(d-o-u-b-l-e) 스펠링만 챙겨주세요.",
+        before: "💡 내 문장: Just in case Make sure to duble-check."
+      },
+      {
+        id: "d3-3",
+        cat: "day3",
+        tag: "Day 3 완벽 정답 🎉",
+        ko: "오늘은 이쯤에서 마무리합시다.",
+        hint: "앞머리: Let's wrap it up ~",
+        en: "Let's wrap it up for today.",
+        tip: "회의나 업무를 끝낼 때 finish 대신 'wrap it up(포장하듯 깔끔히 마무리하다)'을 쓰면 원어민처럼 들립니다."
+      },
+      {
+        id: "d3-4",
+        cat: "day3",
+        tag: "Day 3 세트 표현 (퇴근)",
+        ko: "전 오늘 업무는 여기까지 할게요 (퇴근할게요).",
+        hint: "앞머리: I'm gonna call it ~",
+        en: "I'm gonna call it a day.",
+        tip: "Let's wrap it up과 세트로 매일 쓰이는 퇴근 인사입니다!"
+      },
+      {
+        id: "d3-5",
+        cat: "day3",
+        tag: "Day 2 복습 교정 (d 주의!)",
+        ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
+        hint: "앞머리: We're supposed to ~",
+        en: "We're supposed to start the project tomorrow.",
+        tip: "발음할 때 '서포즈투'로 들려서 d를 빼먹기 쉽지만, 글로 쓸 때는 꼭 supposed(d 포함!)로 적어주세요. tomorrow 앞에 at을 뺀 건 정말 잘하셨어요!",
+        before: "💡 내 문장: We're suppose to start the project tomorrorw."
+      },
+      {
+        id: "d3-6",
+        cat: "day3",
+        tag: "Day 3 응용",
+        ko: "나 이제 막 회의에 들어가려던 참이야.",
+        hint: "앞머리: I'm about to ~",
+        en: "I'm about to join the meeting.",
+        tip: "회의에 참석하다/들어가다는 'join the meeting'을 가장 많이 씁니다."
+      },
+
       // Day 2 (New lesson & user's specific corrections)
       {
         id: "d2-1",
@@ -696,7 +755,7 @@
       }
     ];
 
-    let currentCategory = "day2";
+    let currentCategory = "day3";
     let currentIndex = 0;
     let slowToggle = false;
     let memorizedIds = JSON.parse(localStorage.getItem("jireumgil_memorized") || "[]");

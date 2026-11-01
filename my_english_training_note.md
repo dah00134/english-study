@@ -51,3 +51,27 @@
 | **2. 우리 내일 프로젝트 시작하기로 되어 있어** | We're supposed to start the project at tomorrow. | ⚠️ `tomorrow`, `today`, `yesterday` 앞에는 전치사(`at`, `on`)를 쓰지 않아요! `at`만 빼면 100점!<br>👉 **We're supposed to start the project tomorrow.** |
 | **3. 혹시 그분 전화번호 아시나요?** | Do you happen to know his phone number? | 🎉 **100점 완벽합니다!** 토씨 하나 안 틀리고 정확해요! |
 | **4. 편하게 연락 주세요. 일정 같이 검토해 봅시다.** | Feel free to call me. we're supposed to review this schedule. | 💡 "~해 봅시다(제안)"는 **`Let's ~`**로 시작하고, '검토하다'는 구동사 **`go over`**를 쓰면 원어민 느낌이 확 삽니다!<br>👉 **Feel free to call me anytime. Let's go over this schedule.** |
+
+
+---
+
+## 🗓️ Day 3: 복습 워밍업 & 회의/업무 마무리, 당부하기 (2026-11-01)
+
+### 1. 오늘의 핵심 패턴 3가지
+1. **`I'm about to + 동사원형`** (나 이제 막 ~하려던 참이야)
+   - `I'm about to send the email.` (나 이제 막 이메일을 보내려던 참이야.)
+   - `I'm about to join the meeting.` (나 이제 막 회의에 들어가려던 참이야.)
+2. **`Just in case` & `Make sure to + 동사원형`** (혹시 모르니까 / 꼭 ~해 주세요)
+   - `Just in case, make sure to double-check.` (혹시 모르니까, 꼭 두 번(재차) 확인해 주세요. — *스펠링 주의: `double-check`*)
+3. **`Let's wrap it up` / `I'm gonna call it a day`** (이만 마무리합시다 / 오늘은 여기까지 할게요)
+   - `Let's wrap it up for today.` (오늘은 이쯤에서 마무리합시다.)
+   - `I'm gonna call it a day.` (오늘은 이만 퇴근할게요 / 여기까지 할게요.)
+
+### 2. Day 3 실전 퀴즈 & 교정 기록
+| 문제 | 내가 작성한 문장 | 교정 포인트 & 완성 문장 (Best) |
+| :--- | :--- | :--- |
+| **1. [복습 1] 이슈 작업 중이야, 이따 연락할게** | I'm working on the issue now. I'll get back to you later. | 🎉 **100점 완벽합니다!** 일주일 지났는데도 토씨 하나 안 틀리고 완벽하게 체화하셨어요! |
+| **2. [복습 2] 우리 내일 프로젝트 시작하기로 되어 있어** | We're suppose to start the project tomorrorw. | 👍 지난번에 실수했던 `at tomorrow`를 완벽하게 고치셨어요! 다만 발음상 잘 안 들리는 `supposed`의 끝에 **`d`**와 `tomorrow` 스펠링만 챙기면 100점!<br>👉 **We're supposed to start the project tomorrow.** |
+| **3. 나 이제 막 이메일 보내려던 참이야** | I'm about to send the email. | 🎉 **100점 완벽합니다!** |
+| **4. 혹시 모르니까, 꼭 두 번 확인해** | Just in case Make sure to duble-check. | 👍 구조 완벽합니다! `double`(`o` 포함) 스펠링만 주의!<br>👉 **Just in case, make sure to double-check.** |
+| **5. 오늘은 이쯤에서 마무리합시다** | Let's wrap it up for today | 🎉 **100점 완벽합니다!** |
