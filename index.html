@@ -65,13 +65,15 @@
 
     .top-bar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       margin-bottom: 10px;
     }
 
     .mode-segmented {
-      display: inline-flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
       background: #f1f5f9;
       padding: 3px;
       border-radius: 10px;
@@ -418,7 +420,7 @@
       border-top: 1px solid var(--border);
       padding: 10px 16px calc(12px + env(safe-area-inset-bottom));
       display: grid;
-      grid-template-columns: 88px 1fr 88px;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
       z-index: 30;
     }
@@ -429,7 +431,7 @@
       color: var(--text-primary);
       border-radius: 14px;
       height: 48px;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -444,16 +446,14 @@
       background: #f1f5f9;
     }
 
-    .dock-btn-check {
-      background: var(--surface);
-      color: var(--text-primary);
-      border: 1.5px solid var(--border-strong);
+    .dock-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
     }
 
-    .dock-btn-check.memorized {
-      background: var(--success);
-      color: #ffffff;
-      border-color: var(--success);
+    .dock-btn-primary:active {
+      background: #1d4ed8;
     }
   </style>
 </head>
@@ -465,7 +465,6 @@
         <button class="seg-btn active" id="tabFlash" onclick="switchMode('flash')">카드 학습</button>
         <button class="seg-btn" id="tabList" onclick="switchMode('list')">전체 목록</button>
       </div>
-      <div class="progress-pill" id="progressBadge">암기 0 / 0</div>
     </div>
 
     <div class="filter-scroll" id="categoryChips">
@@ -519,9 +518,8 @@
 
   <!-- Bottom Navigation Bar for Flashcard Mode -->
   <div class="bottom-dock" id="bottomDock">
-    <button class="dock-btn" onclick="prevCard()">‹ 이전</button>
-    <button class="dock-btn dock-btn-check" id="memorizeBtn" onclick="toggleMemorize()">✓ 암기 완료 체크</button>
-    <button class="dock-btn" onclick="nextCard()">다음 ›</button>
+    <button class="dock-btn" onclick="prevCard()">‹ 이전 문장</button>
+    <button class="dock-btn dock-btn-primary" onclick="nextCard()">다음 문장 ›</button>
   </div>
 
   <script>
@@ -811,17 +809,10 @@
 
     let currentCategory = "day3";
     let currentIndex = 0;
-    let memorizedIds = JSON.parse(localStorage.getItem("jireumgil_memorized") || "[]");
 
     function getFilteredCards() {
       if (currentCategory === "all") return cardsData;
       return cardsData.filter(c => c.cat === currentCategory);
-    }
-
-    function updateProgress() {
-      const total = cardsData.length;
-      const done = memorizedIds.length;
-      document.getElementById("progressBadge").textContent = `암기 ${done} / ${total}`;
     }
 
     function renderCard() {
@@ -848,18 +839,6 @@
       } else {
         beforeEl.style.display = "none";
       }
-
-      const memBtn = document.getElementById("memorizeBtn");
-      const isMem = memorizedIds.includes(card.id);
-      if (isMem) {
-        memBtn.classList.add("memorized");
-        memBtn.textContent = "✓ 암기 완료됨";
-      } else {
-        memBtn.classList.remove("memorized");
-        memBtn.textContent = "✓ 암기 완료 체크";
-      }
-
-      updateProgress();
     }
 
     function toggleReveal() {
@@ -874,22 +853,6 @@
     function nextCard() {
       currentIndex++;
       renderCard();
-    }
-
-    function toggleMemorize() {
-      const list = getFilteredCards();
-      const card = list[currentIndex];
-      if (!card) return;
-
-      const idx = memorizedIds.indexOf(card.id);
-      if (idx === -1) {
-        memorizedIds.push(card.id);
-      } else {
-        memorizedIds.splice(idx, 1);
-      }
-      localStorage.setItem("jireumgil_memorized", JSON.stringify(memorizedIds));
-      renderCard();
-      renderList();
     }
 
     function speakText(text, rate = 0.95) {
@@ -918,15 +881,14 @@
       container.innerHTML = "";
 
       list.forEach((card) => {
-        const isMem = memorizedIds.includes(card.id);
         const div = document.createElement("div");
-        div.className = "list-card" + (isMem ? " memorized" : "");
+        div.className = "list-card";
         div.innerHTML = `
           <div class="list-card-top">
             <span class="card-tag">${card.tag}</span>
             <div class="list-actions">
-              <button class="icon-btn" onclick="speakText('${card.en.replace(/'/g, "\\'")}', 0.95)">🔊 듣기</button>
-              <button class="icon-btn ${isMem ? "done" : ""}" onclick="toggleMemById('${card.id}')">${isMem ? "✓ 완료" : "암기 체크"}</button>
+              <button class="icon-btn" onclick="speakText('${card.en.replace(/'/g, "\\'")}', 0.95)">🔊 보통</button>
+              <button class="icon-btn" onclick="speakText('${card.en.replace(/'/g, "\\'")}', 0.75)">🐢 느리게</button>
             </div>
           </div>
           <div class="list-ko">${card.ko}</div>
@@ -935,15 +897,6 @@
         `;
         container.appendChild(div);
       });
-    }
-
-    function toggleMemById(id) {
-      const idx = memorizedIds.indexOf(id);
-      if (idx === -1) memorizedIds.push(id);
-      else memorizedIds.splice(idx, 1);
-      localStorage.setItem("jireumgil_memorized", JSON.stringify(memorizedIds));
-      renderCard();
-      renderList();
     }
 
     function switchMode(mode) {
