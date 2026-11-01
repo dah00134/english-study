@@ -21,9 +21,9 @@
       --primary: #2563eb;
       --primary-soft: #eff6ff;
       --primary-border: #bfdbfe;
-      --success: #16a34a;
-      --success-soft: #f0fdf4;
-      --success-border: #bbf7d0;
+      --yt-red: #dc2626;
+      --yt-soft: #fef2f2;
+      --yt-border: #fecaca;
       --warning-bg: #fffbeb;
       --warning-text: #b45309;
       --warning-border: #fde68a;
@@ -72,7 +72,7 @@
 
     .mode-segmented {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1.15fr;
       width: 100%;
       background: #f1f5f9;
       padding: 3px;
@@ -85,7 +85,7 @@
       color: var(--text-secondary);
       font-size: 0.82rem;
       font-weight: 700;
-      padding: 6px 12px;
+      padding: 7px 8px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -95,16 +95,6 @@
       background: var(--surface);
       color: var(--text-primary);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-    }
-
-    .progress-pill {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      background: var(--primary-soft);
-      border: 1px solid var(--primary-border);
-      padding: 5px 11px;
-      border-radius: 999px;
     }
 
     /* Category Filter Chips */
@@ -172,7 +162,6 @@
       border-color: var(--primary-border);
     }
 
-    /* Card Top Header */
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -195,7 +184,6 @@
       color: var(--text-muted);
     }
 
-    /* Card Question Area */
     .question-section {
       margin-bottom: 16px;
     }
@@ -232,7 +220,6 @@
       width: 100%;
     }
 
-    /* Card Answer Area */
     .answer-section {
       display: none;
       margin-top: 16px;
@@ -266,7 +253,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* Dedicated Audio Control Strip Inside Card */
     .audio-bar {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -317,7 +303,6 @@
       line-height: 1.45;
     }
 
-    /* Card Footer Prompt */
     .reveal-prompt {
       margin-top: 20px;
       padding: 13px;
@@ -348,11 +333,6 @@
       box-shadow: var(--shadow-sm);
     }
 
-    .list-card.memorized {
-      background: #f8fafc;
-      border-color: var(--success-border);
-    }
-
     .list-card-top {
       display: flex;
       justify-content: space-between;
@@ -374,12 +354,6 @@
       padding: 6px 10px;
       border-radius: 8px;
       cursor: pointer;
-    }
-
-    .icon-btn.done {
-      background: var(--success-soft);
-      color: var(--success);
-      border-color: var(--success-border);
     }
 
     .list-ko {
@@ -405,6 +379,168 @@
       padding: 8px 10px;
       border-radius: 8px;
       line-height: 1.45;
+    }
+
+    /* Shorts 30 Archive Mode */
+    .shorts-view {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .shorts-part-filter {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-bottom: 4px;
+    }
+    .shorts-part-filter::-webkit-scrollbar {
+      display: none;
+    }
+
+    .part-chip {
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #e2e8f0;
+      color: var(--text-secondary);
+      border: none;
+      cursor: pointer;
+    }
+
+    .part-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .video-header {
+      padding: 15px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .video-title-wrap {
+      flex: 1;
+    }
+
+    .video-num {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .video-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.38;
+      color: var(--text-primary);
+      word-break: keep-all;
+    }
+
+    .video-tip {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .yt-link-btn {
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--yt-red);
+      background: var(--yt-soft);
+      border: 1px solid var(--yt-border);
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .video-sentences {
+      border-top: 1px solid var(--border);
+      background: var(--surface-sub);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sentence-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sentence-texts {
+      flex: 1;
+    }
+
+    .s-en {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.35;
+      margin-bottom: 3px;
+    }
+
+    .s-ko {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .s-note {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .s-speak-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-sub);
+      color: var(--text-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .s-speak-btn:active {
+      background: #e2e8f0;
     }
 
     /* Fixed Bottom Control Bar (Flashcard Mode) */
@@ -464,6 +600,7 @@
       <div class="mode-segmented">
         <button class="seg-btn active" id="tabFlash" onclick="switchMode('flash')">카드 학습</button>
         <button class="seg-btn" id="tabList" onclick="switchMode('list')">전체 목록</button>
+        <button class="seg-btn" id="tabShorts" onclick="switchMode('shorts')">📺 유튜브 정리</button>
       </div>
     </div>
 
@@ -475,6 +612,14 @@
       <button class="chip" data-cat="phrasal">필수 구동사</button>
       <button class="chip" data-cat="travel">여행·스몰토크</button>
       <button class="chip" data-cat="all">전체</button>
+    </div>
+
+    <div class="shorts-part-filter" id="shortsPartChips" style="display:none;">
+      <button class="part-chip active" data-part="all" onclick="filterShortsPart('all', this)">전체 (24개 영상)</button>
+      <button class="part-chip" data-part="p1" onclick="filterShortsPart('p1', this)">Part 1. 1초 앞대가리 패턴</button>
+      <button class="part-chip" data-part="p2" onclick="filterShortsPart('p2', this)">Part 2. 해외여행 회화</button>
+      <button class="part-chip" data-part="p3" onclick="filterShortsPart('p3', this)">Part 3. 필수 구동사</button>
+      <button class="part-chip" data-part="p4" onclick="filterShortsPart('p4', this)">Part 4. 원어민 발음</button>
     </div>
   </header>
 
@@ -514,6 +659,9 @@
 
     <!-- List View -->
     <div class="list-view" id="listView"></div>
+
+    <!-- YouTube Shorts 30 View -->
+    <div class="shorts-view" id="shortsView"></div>
   </main>
 
   <!-- Bottom Navigation Bar for Flashcard Mode -->
@@ -807,8 +955,324 @@
       }
     ];
 
+    // Full YouTube Shorts 30 Archive Data
+    const shortsArchive = [
+      {
+        part: "p1",
+        num: "영상 1",
+        title: "빠르게 말하기 | 영어는 첫 시작이 빨라야 해요",
+        url: "https://www.youtube.com/shorts/qck7SmWrwKY",
+        tip: "상태를 나타내는 앞머리(I'm ~, You're ~)를 1초 만에 먼저 내뱉으세요.",
+        items: [
+          { en: "I'm in the middle of something.", ko: "나 지금 뭐 좀 하고 있는 중이야." },
+          { en: "I'm in the middle of a meeting.", ko: "나 지금 회의 중이야." },
+          { en: "I'm supposed to meet him later.", ko: "나 이따가 걔 만나기로 되어 있어." },
+          { en: "I'm supposed to be there by 6.", ko: "나 6시까지 거기 가야 해." },
+          { en: "I'm used to waking up early.", ko: "난 일찍 일어나는 데 익숙해." },
+          { en: "I'm up for anything.", ko: "난 뭐든 좋아 (찬성이야)." },
+          { en: "I'm dying to know. / I'm dying to see you.", ko: "너무 궁금해 죽겠어. / 네가 너무 보고 싶어." },
+          { en: "You're getting on my nerves.", ko: "너 자꾸 내 신경 건드리고 있어." },
+          { en: "You're getting cold feet.", ko: "막상 하려니까 겁먹고 있네." },
+          { en: "You're supposed to show up on time.", ko: "너 제시간에 나타나야 하잖아." },
+          { en: "It's not like I had a choice.", ko: "나한테 선택권이 있었던 것도 아니잖아." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 2",
+        title: "1초 영어 말하기 | 첫부분만 알면 쉽게 말이 나와요",
+        url: "https://www.youtube.com/shorts/lBjzXuyxo0s",
+        tip: "It's ~와 That's + 의문사(what/why/how/where/when/who) 공식입니다.",
+        items: [
+          { en: "It's hard to tell. / It's hard to put into words.", ko: "판단하기 어려워. / 말로 표현하기 어려워." },
+          { en: "It's not that I don't like you.", ko: "널 싫어한다는 건 아니야." },
+          { en: "It's getting late. / It's getting dark.", ko: "시간이 점점 늦어지고 있어. / 점점 어두워지고 있어." },
+          { en: "It's just that I'm tired.", ko: "그냥 좀 피곤해서 그래." },
+          { en: "That's what I mean. / That's what I'm talking about.", ko: "내 말이 바로 그 말이야. / 바로 이거지!" },
+          { en: "That's why I like you. / That's why I said that.", ko: "그래서 내가 널 좋아하는 거야. / 그래서 그렇게 말한 거야." },
+          { en: "That's how I found you.", ko: "그렇게 해서 내가 널 찾은 거야." },
+          { en: "That's where I live. / That's where I work.", ko: "거기가 내가 사는 곳이야. / 일하는 곳이야." },
+          { en: "That's when I realized.", ko: "바로 그때 내가 깨달았어." },
+          { en: "That's who I was talking about.", ko: "그 사람이 바로 내가 말했던 사람이야." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 3",
+        title: "첫 시작이 바로 생각나야 영어가 나와요 (I'm trying to)",
+        url: "https://www.youtube.com/shorts/TiD5K-92J2A",
+        tip: "I'm trying to (~하려고 노력 중이야) + 구동사 조합입니다.",
+        items: [
+          { en: "I'm trying to cut back on coffee.", ko: "나 커피 좀 줄이려고 노력 중이야." },
+          { en: "I'm trying to get back in shape.", ko: "다시 몸 좀 만들려고 해." },
+          { en: "I'm trying to keep it together.", ko: "나 어떻게든 멘탈 잡고 버티려고 해." },
+          { en: "I'm trying to get over it.", ko: "나 그 일 잊고 털어내려고(극복하려고) 해." },
+          { en: "I'm trying to stay out of trouble.", ko: "나 괜히 문제에 휘말리지 않으려고 해." },
+          { en: "I'm trying to take it easy.", ko: "나 좀 마음 편하게 가지려고 해." },
+          { en: "I'm trying to stay positive.", ko: "나 긍정적으로 생각하려고 해." },
+          { en: "I'm trying to put it behind me.", ko: "나 그 일은 잊고 앞으로 나아가려고 해." },
+          { en: "I'm trying to break the habit.", ko: "나는 그 습관을 고치려고 해." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 4",
+        title: "첫시작이 바로 생각나야 돼요 (It's / We're / There's)",
+        url: "https://www.youtube.com/shorts/GCXmfMpOhiQ",
+        tip: "가주어 It, We're working on, There is no ~ 패턴입니다.",
+        items: [
+          { en: "It's time to go. / It's time to eat.", ko: "이제 갈 시간이야. / 밥 먹을 시간이야." },
+          { en: "It's nice talking to you.", ko: "너와 이야기하니까 좋다." },
+          { en: "It's easy to find. / It's easy to learn.", ko: "찾기 쉬워. / 배우기 쉬워." },
+          { en: "We're working on a plan.", ko: "우린 지금 계획을 세우고(작업하고) 있는 중이야." },
+          { en: "We're supposed to go next week.", ko: "우린 다음 주에 가기로 되어 있어." },
+          { en: "There is something special.", ko: "뭔가 특별한 게 있어." },
+          { en: "There's no way to know.", ko: "알 길이(방법이) 없어." },
+          { en: "There's no need to go. / There's no need to lie.", ko: "갈 필요 없어. / 거짓말할 필요 없어." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 5",
+        title: "첫시작이 바로 생각나면 쉬워져요 (I can tell / I used to)",
+        url: "https://www.youtube.com/shorts/AYC8quSTxk0",
+        tip: "tell이 '알다/구별하다'로 쓰이는 I can tell 패턴을 꼭 익혀두세요.",
+        items: [
+          { en: "I can tell you're busy.", ko: "네가 바쁜 거 이제 알겠어 (티가 나)." },
+          { en: "I can tell how you feel.", ko: "네 기분이 어떤지 알겠어." },
+          { en: "I used to smoke. / I used to live here.", ko: "나 예전에 담배 피웠었어. / 예전에 여기 살았었어." },
+          { en: "I'm not going to quit.", ko: "난 그만두지 않을 거야." },
+          { en: "You're saying you don't know?", ko: "네 말은 너도 모른다는 거지?" },
+          { en: "You think I'm wrong?", ko: "내가 잘못했다고 생각하는 거야?" },
+          { en: "You mean me? / You mean tomorrow?", ko: "나 말이에요? / 내일 말하는 거죠?" },
+          { en: "You don't have to wait.", ko: "넌 기다리지 않아도 돼." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 6",
+        title: "I'm 첫 시작부터 생각나야 영어가 쉬워져요 (I'm gonna + 숙어)",
+        url: "https://www.youtube.com/shorts/_ryqPfIF9eE",
+        tip: "I'm gonna 뒤에 원어민이 매일 쓰는 필수 숙어를 붙인 표현입니다.",
+        items: [
+          { en: "I'm gonna give it a shot.", ko: "나 한번 시도해 볼게." },
+          { en: "I'm gonna head out.", ko: "나 이제 나갈게 (출발할게)." },
+          { en: "I'm gonna figure something out.", ko: "내가 어떻게든 방법을 찾아볼게." },
+          { en: "I'm gonna grab a bite.", ko: "나 간단히 뭐 좀 먹을게." },
+          { en: "I'm gonna call it a day.", ko: "오늘은 여기까지 할게 (퇴근/마무리할게)." },
+          { en: "I'm gonna keep an eye on it.", ko: "내가 그거 잘 지켜볼게." },
+          { en: "I'm gonna bring it up later.", ko: "그 얘기는 나중에 꺼낼게." },
+          { en: "I'm gonna pass on that.", ko: "난 그건 패스할게 (사양할게)." },
+          { en: "I'm gonna get back to you.", ko: "내가 나중에 다시 연락할게." },
+          { en: "I'm gonna sleep on it.", ko: "하룻밤 자면서 곰곰이 생각해 볼게." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 7 & 8",
+        title: "단어는 쉽지만 한국인이 못 쓰는 I'm 표현 (I'm game 등)",
+        url: "https://www.youtube.com/shorts/SrG4rklDtko",
+        tip: "I'm game은 '나는 게임이다'가 아니라 '나도 끼어들래/완전 콜!'이라는 뜻입니다.",
+        items: [
+          { en: "I'm game to hear more.", ko: "나도 더 들어보고 싶어! (콜!)" },
+          { en: "I'm game to go with you.", ko: "나도 너랑 같이 가고 싶어!" },
+          { en: "I'm big on apple juice.", ko: "난 사과주스를 엄청 좋아해. (마음속 비중이 큼)" },
+          { en: "I'm all set.", ko: "다 준비됐어. / (식당에서) 주문 다 끝났어요." },
+          { en: "I'm good with that. / I'm cool with that.", ko: "나 그거 괜찮아 (흔쾌히 동의해)." },
+          { en: "I'm positive he knows.", ko: "나는 그가 알고 있다고 100% 확신해." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 9",
+        title: "Are you saying 너 말하고 있니? 가 아니에요",
+        url: "https://www.youtube.com/shorts/3KLA7mbMRIw",
+        tip: "상대 말을 확인하는 Are you saying ~? 과 당부하는 Make sure to ~ 패턴입니다.",
+        items: [
+          { en: "Are you saying I'm wrong?", ko: "내가 틀렸다는 말이야?" },
+          { en: "Are you saying you forgot it?", ko: "그걸 잊어버렸다는 거야?" },
+          { en: "Make sure to lock the door.", ko: "문 꼭 잠그고 나가." },
+          { en: "Make sure to double-check.", ko: "꼭 두 번(재차) 확인해 봐." },
+          { en: "I'm good at baking.", ko: "나는 빵 굽는 걸 잘해." },
+          { en: "I'm bad at saying no.", ko: "나는 거절을 잘 못 해." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 10 & 11",
+        title: "원어민이 매일 써먹는 필수표현 3가지 (Feel free 등)",
+        url: "https://www.youtube.com/shorts/WwLKYVhU6ZY",
+        tip: "'편하게 ~하세요', '왠지 모르게', '혹시 모르니까' 3대 필수 표현입니다.",
+        items: [
+          { en: "Feel free to sit down.", ko: "편하게 앉으세요." },
+          { en: "Feel free to call me anytime.", ko: "언제든 편하게 전화 주세요." },
+          { en: "For some reason, I'm tired.", ko: "왠지 모르게 피곤하네." },
+          { en: "For some reason, I can't focus.", ko: "왠지 모르게 집중이 안 된다." },
+          { en: "Just in case, ask one more time.", ko: "혹시 모르니까 한 번 더 물어봐." },
+          { en: "Just in case, set an alarm.", ko: "혹시 모르니까 알람을 맞춰 둬." },
+          { en: "Just in case, take your passport.", ko: "혹시 모르니까 여권도 챙겨." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 12 & 13",
+        title: "원어민도 영어 첫마디 이렇게 시작해요 (I can't wait / I'm afraid)",
+        url: "https://www.youtube.com/shorts/6TeLSjsh0pw",
+        tip: "'빨리 ~하고 싶어'는 I can't wait to ~, 아쉬운 소식을 전할 땐 I'm afraid ~!",
+        items: [
+          { en: "I can't wait to go. / I can't wait to see it.", ko: "빨리 가고 싶어! / 빨리 보고 싶어!" },
+          { en: "The thing is, I can't swim.", ko: "사실은(문제는) 나 수영을 못 해." },
+          { en: "The thing is, I don't like seafood.", ko: "사실은 나 해산물을 안 좋아해." },
+          { en: "I'm afraid I'm busy today.", ko: "죄송하지만 오늘은 제가 바쁘네요." },
+          { en: "I'm afraid it's sold out.", ko: "죄송하지만 품절되었습니다." },
+          { en: "I'm afraid I don't understand.", ko: "죄송하지만 제가 이해를 못 했습니다." }
+        ]
+      },
+      {
+        part: "p1",
+        num: "영상 14, 15, 16",
+        title: "기초 영어 앞대가리 공식 (kind of / happen to / about to / tend to)",
+        url: "https://www.youtube.com/shorts/MD1KTloy2Vg",
+        tip: "일상과 비즈니스에서 매일 쓰는 4대 핵심 조동사급 패턴입니다.",
+        items: [
+          { en: "I'm kind of tired. / I'm kind of busy.", ko: "나 약간(좀) 피곤해. / 나 좀 바빠." },
+          { en: "I just need to wash my hands.", ko: "나 손만 씻고 올게 (손만 씻으면 돼)." },
+          { en: "Do you happen to like coffee?", ko: "혹시 커피 좋아하세요?" },
+          { en: "Do you happen to know her phone number?", ko: "혹시 그녀의 전화번호 아시나요?" },
+          { en: "I'm about to go home. / I'm about to call you.", ko: "이제 막 집에 가려고. / 막 전화하려던 참이었어." },
+          { en: "I tend to wake up early.", ko: "나는 일찍 일어나는 편이야." },
+          { en: "I tend to skip breakfast.", ko: "난 아침을 거르는 편이야." },
+          { en: "I'm gonna eat out tonight.", ko: "오늘 저녁은 외식할 거야." }
+        ]
+      },
+      {
+        part: "p2",
+        num: "영상 17",
+        title: "해외 여행 영어 회화 필수 패턴 10가지 (식당/카페 듣기편)",
+        url: "https://www.youtube.com/shorts/2wZFRC8TZXg",
+        tip: "식당/카페 직원이 무조건 쓰는 표현입니다. 연음 소리로 기억하세요!",
+        items: [
+          { en: "For here or to go?", ko: "드시고 가시나요, 포장해 가시나요? [포히어럴 투고]" },
+          { en: "Table for how many?", ko: "몇 분이세요?" },
+          { en: "How would you like your eggs?", ko: "계란은 어떻게 요리해 드릴까요? [하우쥬 라이켜 에그즈]" },
+          { en: "Did you leave room for coffee?", ko: "커피 드실 배(공간)는 남겨두셨나요? (커피 드릴까요?)" },
+          { en: "Cash or card?", ko: "현금으로 하세요, 카드로 하세요? [캐숼카드]" },
+          { en: "Are you still working on that?", ko: "아직 식사 중이신가요? (그릇 치워도 될까요?)" },
+          { en: "Did you find everything okay?", ko: "식사는 다 괜찮으셨나요?" },
+          { en: "How did you find the food?", ko: "음식은 어떠셨어요?" },
+          { en: "Anything else for you today?", ko: "오늘 더 필요한 건 없으신가요?" },
+          { en: "I'll have that right out for you.", ko: "바로 가져다 드릴게요." }
+        ]
+      },
+      {
+        part: "p2",
+        num: "영상 18",
+        title: "해외 여행 영어도 첫시작이 생각나야 돼요 (말하기편)",
+        url: "https://www.youtube.com/shorts/9xjnS5G9nD4",
+        tip: "여행지에서 주문, 부탁, 길 찾기, 컴플레인할 때 쓰는 앞머리 공식입니다.",
+        items: [
+          { en: "Can I get some water? / Can I get an Americano?", ko: "물 좀 주시겠어요? / 아메리카노 주시겠어요?" },
+          { en: "Could you take a picture for us?", ko: "사진 좀 찍어 주시겠어요?" },
+          { en: "How do I get to the bus stop?", ko: "버스 정류장까지는 어떻게 가나요?" },
+          { en: "Is it okay to take pictures here?", ko: "여기서 사진 찍어도 되나요?" },
+          { en: "Is it okay to check in early?", ko: "일찍 체크인해도 되나요?" },
+          { en: "I'd like to change my room.", ko: "방을 바꾸고 싶습니다." },
+          { en: "I'm looking for the restroom.", ko: "화장실을 찾고 있어요." },
+          { en: "I'm here to check in.", ko: "체크인하러 왔어요." },
+          { en: "There's a problem with the shower.", ko: "샤워기에 문제가 생겼어요." }
+        ]
+      },
+      {
+        part: "p3",
+        num: "영상 19 & 20",
+        title: "원어민이 매일 쓰는 구동사 up / down 모음 (1탄 & 2탄)",
+        url: "https://www.youtube.com/shorts/mPcyh6NpOxM",
+        tip: "UP은 '완전히/끝까지 채움', DOWN은 '감소/정지/끝까지 파고듦'의 뉘앙스입니다.",
+        items: [
+          { en: "Eat up, please. / Drink up!", ko: "싹 다 드세요. / 다 마셔(원샷해)!" },
+          { en: "Fill it up, please.", ko: "(기름·물 등을) 가득 채워 주세요." },
+          { en: "Button up your coat.", ko: "코트 단추를 끝까지 다 채워라." },
+          { en: "Let's wrap up for today.", ko: "오늘은 이만 마무리합시다." },
+          { en: "I'll make up for it.", ko: "내가 그거 꼭 만회(보상)할게." },
+          { en: "My car broke down.", ko: "내 차가 (기능이 멈춰) 고장 났어." },
+          { en: "Let's boil it down.", ko: "(졸여서) 핵심만 요약해 보자." },
+          { en: "Let's narrow down the list.", ko: "(폭을 좁혀) 목록·선택지를 추려보자." },
+          { en: "They hunted him down.", ko: "그를 끝까지 추적해서 잡았다." },
+          { en: "Let's drill down into the details.", ko: "세부 사항을 깊게 파헤쳐 보자." }
+        ]
+      },
+      {
+        part: "p3",
+        num: "영상 21 & 22",
+        title: "원어민이 밥먹듯이 쓰는 구동사 on / off 모음 (1탄 & 2탄)",
+        url: "https://www.youtube.com/shorts/ndpmSVLh-5U",
+        tip: "ON은 '접촉+계속 지속', OFF는 '분리+이탈/차단'의 코어 이미지를 가집니다.",
+        items: [
+          { en: "I'm working on it.", ko: "지금 그거 (붙어서 계속) 작업 중이야." },
+          { en: "Can I try this on?", ko: "이거 한번 입어(신어) 봐도 되나요?" },
+          { en: "Hold on a second.", ko: "(끊지 말고 붙잡고) 잠깐만 기다려 봐." },
+          { en: "Please pass it on.", ko: "이거 (계속 이어서) 전달 좀 해줘." },
+          { en: "Don't look back on the past.", ko: "과거를 되돌아보지(회상하지) 마." },
+          { en: "What time do you get off work?", ko: "몇 시에 (직장에서 분리되어) 퇴근해?" },
+          { en: "Take off your shoes.", ko: "신발을 벗으세요." },
+          { en: "Wipe off the table.", ko: "테이블을 닦아내세요." },
+          { en: "Don't put it off.", ko: "그 일 (멀리 떼어놓고) 미루지 마." },
+          { en: "The police blocked off the street.", ko: "경찰이 도로를 차단(봉쇄)했다." }
+        ]
+      },
+      {
+        part: "p3",
+        num: "영상 23 & 24",
+        title: "원어민이 매일 쓰는 구동사 in / out / into 모음",
+        url: "https://www.youtube.com/shorts/EHVytlx22oI",
+        tip: "IN(안으로), OUT(밖으로 드러남), INTO(뚫고 들어가 부딪힘·변화)를 구분하세요.",
+        items: [
+          { en: "cut in / break in", ko: "(대화에) 끼어들다 / (건물에) 침입하다" },
+          { en: "take in / zoom in", ko: "이해하고 받아들이다 / 크게 확대하다" },
+          { en: "give in / chip in", ko: "(요구에) 굴복하다 / 돈을 각출해 보태다" },
+          { en: "drop out / make out / carry out", ko: "중도 포기하다 / 겨우 알아보다 / (계획을) 실행하다" },
+          { en: "I ran into him. / I bumped into him.", ko: "그를 우연히 마주쳤어." },
+          { en: "get into trouble", ko: "(문제 상황 안으로 들어가) 곤경에 처하다" }
+        ]
+      },
+      {
+        part: "p3",
+        num: "영상 25, 26, 27",
+        title: "구동사 over / away & 전치사 to / at / for & get 동사 9가지",
+        url: "https://www.youtube.com/shorts/CWb3u-IcEIQ",
+        tip: "OVER(넘어서), AWAY(제거), 그리고 GET의 3대 원리(장소·상태·마음의 이동)입니다.",
+        items: [
+          { en: "Let's go over this.", ko: "이거 같이 검토해 보자." },
+          { en: "Let me think it over.", ko: "내가 곰곰이 생각해 볼게." },
+          { en: "Put away your toys. / Throw it away.", ko: "장난감 제자리에 치워라. / 그거 버려라." },
+          { en: "I gave away my old clothes.", ko: "헌 옷들을 무료로 나눠줬어(기부했어)." },
+          { en: "Stick to the plan.", ko: "계획을 고수해라(지켜라)." },
+          { en: "What are you getting at?", ko: "돌려 말하지 말고 하려는(겨냥하는) 말이 뭐야?" },
+          { en: "get home / get in the car / get to work", ko: "[장소 이동] 집에 도착하다 / 차에 타다 / 출근하다" },
+          { en: "I'm getting tired. / It's getting hot.", ko: "[상태 이동] 점점 피곤해진다. / 점점 더워진다." },
+          { en: "I get the picture. / I get your point.", ko: "[마음 이동 = 이해하다] 상황이 이해돼. / 네 말뜻 알겠어." }
+        ]
+      },
+      {
+        part: "p4",
+        num: "영상 28, 29, 30",
+        title: "원어민 발음 & 리스닝 비결 (패밀리 / 와루아이 / 헤롬나우)",
+        url: "https://www.youtube.com/shorts/vUW2tkF8Soc",
+        tip: "강세 없는 모음 생략하기, Why do I 연음[와루아이], head home[헤롬] 소리 비결입니다.",
+        items: [
+          { en: "camera / family / everybody", ko: "원어민 발음: [캠-러] / [패믈리] / [에브리바리]" },
+          { en: "memory / delivery", ko: "원어민 발음: [메므리] / [들리브리]" },
+          { en: "Why do I say that?", ko: "[와루아이 세이 댓?] 내가 왜 그런 말을 했지?" },
+          { en: "Why do I feel so tired today?", ko: "[와루아이 필 쏘 타이어드 투데이?] 오늘따라 왜 이리 피곤하지?" },
+          { en: "Why do I do this every time?", ko: "[와루아이 두 디스 에브리 타임?] 난 왜 매번 이럴까?" },
+          { en: "I'm gonna head home now.", ko: "[암거너 헤롬나우] 나 이제 집으로 갈게." }
+        ]
+      }
+    ];
+
     let currentCategory = "day3";
     let currentIndex = 0;
+    let currentShortsPart = "all";
 
     function getFilteredCards() {
       if (currentCategory === "all") return cardsData;
@@ -861,7 +1325,7 @@
         return;
       }
       window.speechSynthesis.cancel();
-      const cleanText = text.replace(/\(.*?\)/g, "").replace(/\//g, ". ");
+      const cleanText = text.replace(/\[.*?\]/g, "").replace(/\(.*?\)/g, "").replace(/\//g, ". ");
       const utter = new SpeechSynthesisUtterance(cleanText);
       utter.lang = "en-US";
       utter.rate = rate;
@@ -899,26 +1363,98 @@
       });
     }
 
+    function renderShorts() {
+      const container = document.getElementById("shortsView");
+      container.innerHTML = "";
+
+      const filtered = currentShortsPart === "all"
+        ? shortsArchive
+        : shortsArchive.filter(v => v.part === currentShortsPart);
+
+      filtered.forEach((video) => {
+        const card = document.createElement("div");
+        card.className = "video-card";
+
+        let rowsHtml = "";
+        video.items.forEach((item) => {
+          const safeEn = item.en.replace(/'/g, "\\'");
+          rowsHtml += `
+            <div class="sentence-row">
+              <div class="sentence-texts">
+                <div class="s-en">${item.en}</div>
+                <div class="s-ko">${item.ko}</div>
+              </div>
+              <button class="s-speak-btn" onclick="speakText('${safeEn}', 0.92)" title="발음 듣기">🔊</button>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="video-header">
+            <div class="video-title-wrap">
+              <span class="video-num">${video.num}</span>
+              <div class="video-title">${video.title}</div>
+              <div class="video-tip">💡 ${video.tip}</div>
+            </div>
+            <a class="yt-link-btn" href="${video.url}" target="_blank" rel="noopener">▶ 영상 보기</a>
+          </div>
+          <div class="video-sentences">
+            ${rowsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterShortsPart(part, btnEl) {
+      currentShortsPart = part;
+      document.querySelectorAll(".part-chip").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+      renderShorts();
+    }
+
     function switchMode(mode) {
       const fView = document.getElementById("flashcardView");
       const lView = document.getElementById("listView");
+      const sView = document.getElementById("shortsView");
       const dock = document.getElementById("bottomDock");
+      const catChips = document.getElementById("categoryChips");
+      const partChips = document.getElementById("shortsPartChips");
+
       const tFlash = document.getElementById("tabFlash");
       const tList = document.getElementById("tabList");
+      const tShorts = document.getElementById("tabShorts");
+
+      tFlash.classList.remove("active");
+      tList.classList.remove("active");
+      tShorts.classList.remove("active");
 
       if (mode === "flash") {
         fView.style.display = "flex";
         lView.style.display = "none";
+        sView.style.display = "none";
         dock.style.display = "grid";
+        catChips.style.display = "flex";
+        partChips.style.display = "none";
         tFlash.classList.add("active");
-        tList.classList.remove("active");
-      } else {
+      } else if (mode === "list") {
         fView.style.display = "none";
         lView.style.display = "flex";
+        sView.style.display = "none";
         dock.style.display = "none";
-        tFlash.classList.remove("active");
+        catChips.style.display = "flex";
+        partChips.style.display = "none";
         tList.classList.add("active");
         renderList();
+      } else if (mode === "shorts") {
+        fView.style.display = "none";
+        lView.style.display = "none";
+        sView.style.display = "flex";
+        dock.style.display = "none";
+        catChips.style.display = "none";
+        partChips.style.display = "flex";
+        tShorts.classList.add("active");
+        renderShorts();
       }
     }
 
