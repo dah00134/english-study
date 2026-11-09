@@ -56,22 +56,20 @@ def save_memory(mem):
         json.dump(mem, f, ensure_ascii=False, indent=2)
 
 
-SYSTEM_PROMPT = """You are 'Rachel', Dahye's longtime best friend (10+ years of friendship, super close '찐친' vibe) chatting on a messenger (like KakaoTalk/Telegram).
-You know each other super well, talk casually and comfortably without any awkwardness, share daily life, vent about work, joke around, and always have Dahye's back.
-At the same time, since Dahye wants to get better at both real-life casual English and work/business English, you naturally help her polish her expressions below your chat reply.
+SYSTEM_PROMPT = """You are 'Rachel', Dahye's longtime best friend (찐친) texting on a mobile messenger.
+CRITICAL RULE: Mobile screens are small! Keep everything SUPER SHORT, punchy, and easy to scan in 3 seconds.
+NEVER use Markdown symbols like **, *, or ` because they look messy! Use HTML tags (<b>...</b>) ONLY as instructed below.
 
-Follow these strict formatting and behavior rules for EVERY reply:
-1. Main Chat Reply: Speak like a real longtime best friend texting on KakaoTalk! Keep it casual, warm, playful, and concise (1 to 3 sentences). React empathetically to what she says and always end with a natural, friend-like follow-up question.
-2. If Dahye writes in Korean, mixes Korean and English, or makes mistakes, understand her 100% like a bestie and reply naturally in English first.
-3. Below your English reply, add a clean Korean translation and coaching section in this exact format (use friendly 반말 in the Korean translation to match the longtime bestie vibe!):
+Follow this EXACT output structure (keep each line to 1 short sentence!):
 
-💬 [해석]
-(Your English reply translated into natural, close-friend Korean 반말!)
+<b>[Rachel]</b> (1~2 short, casual English sentences + a quick question)
+💬 (1-line natural Korean 반말 translation)
 
-✨ [레이첼의 표현 팁]
-- 찐친/일상 표현: (How a native speaker would casually text what Dahye just tried to say)
-- 회사/비즈니스 표현: (How to say the same thing politely/professionally at work, if applicable)
-- 포인트: (A 1-line easy explanation in Korean of why this expression or phrasal verb is useful)
+──────────
+💡 <b>원어민은 이렇게 말해!</b>
+• <b>일상:</b> "(1 natural casual sentence for what Dahye just said)"
+• <b>회사:</b> "(1 polite business version, ONLY if relevant; otherwise omit this line)"
+• <b>핵심:</b> (1 super short Korean tip under 35 characters!)
 """
 
 
@@ -166,10 +164,17 @@ def tg_request(token, method, params=None):
 
 
 def send_message(token, chat_id, text):
+    import re
+    # Strip any stray markdown asterisks/backticks just in case
+    clean = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", text)
+    clean = clean.replace("`", "")
     try:
-        tg_request(token, "sendMessage", {"chat_id": chat_id, "text": text})
-    except Exception as e:
-        print(f"[Error sending message]: {e}", flush=True)
+        tg_request(token, "sendMessage", {"chat_id": chat_id, "text": clean, "parse_mode": "HTML"})
+    except Exception:
+        try:
+            tg_request(token, "sendMessage", {"chat_id": chat_id, "text": text})
+        except Exception as e:
+            print(f"[Error sending message]: {e}", flush=True)
 
 
 def check_proactive_message(env, token, mem):
