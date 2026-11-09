@@ -58,17 +58,17 @@ def save_memory(mem):
 
 SYSTEM_PROMPT = """You are 'Rachel', Dahye's longtime best friend (찐친) texting on a mobile messenger.
 CRITICAL RULE: Mobile screens are small! Keep everything SUPER SHORT, punchy, and easy to scan in 3 seconds.
-NEVER use Markdown symbols like **, *, or ` because they look messy!
+NEVER use Markdown symbols like **, *, `, or HTML tags like <tg-spoiler>! Output PLAIN TEXT only.
 NEVER put your name like [Rachel] at the start!
-Wrap the Korean translation and tips inside <tg-spoiler>...</tg-spoiler> so Dahye reads the English first and taps the spoiler only when she wants to check!
+Separate the English reply and the Korean coaching section with a line containing ONLY three hyphens: ---
 
 Follow this EXACT output structure:
 
 (1~2 short, casual English sentences + a quick question)
-
-<tg-spoiler>💬 (1-line natural Korean 반말 translation)
-💡 <b>내 표현 다듬기:</b> "(1 natural English sentence for what Dahye just said)"
-📌 (1 super short Korean point under 35 characters)</tg-spoiler>
+---
+💬 (1-line natural Korean 반말 translation)
+💡 내 표현 다듬기: "(1 natural English sentence for what Dahye just said)"
+📌 (1 super short Korean point under 35 characters)
 """
 
 
@@ -164,14 +164,34 @@ def tg_request(token, method, params=None):
 
 def send_message(token, chat_id, text):
     import re
-    # Strip any stray markdown asterisks/backticks just in case
-    clean = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", text)
-    clean = clean.replace("`", "")
+    import html as html_lib
+    # Clean any stray tags or markdown that the model might have emitted
+    cleaned = re.sub(r"</?tg-spoiler[^>]*>", "", text).replace("<tg-spoiler", "")
+    cleaned = cleaned.replace("**", "").replace("`", "").strip()
+
+    # Split English message and Korean tip section by '---' or before '💬'
+    if "---" in cleaned:
+        parts = cleaned.split("---", 1)
+        en_part = parts[0].strip()
+        ko_part = parts[1].strip()
+    elif "💬" in cleaned:
+        idx = cleaned.index("💬")
+        en_part = cleaned[:idx].strip()
+        ko_part = cleaned[idx:].strip()
+    else:
+        en_part = cleaned
+        ko_part = ""
+
+    if ko_part:
+        formatted = f"{html_lib.escape(en_part)}\n\n<tg-spoiler>{html_lib.escape(ko_part)}</tg-spoiler>"
+    else:
+        formatted = html_lib.escape(en_part)
+
     try:
-        tg_request(token, "sendMessage", {"chat_id": chat_id, "text": clean, "parse_mode": "HTML"})
+        tg_request(token, "sendMessage", {"chat_id": chat_id, "text": formatted, "parse_mode": "HTML"})
     except Exception:
         try:
-            tg_request(token, "sendMessage", {"chat_id": chat_id, "text": text})
+            tg_request(token, "sendMessage", {"chat_id": chat_id, "text": cleaned})
         except Exception as e:
             print(f"[Error sending message]: {e}", flush=True)
 
