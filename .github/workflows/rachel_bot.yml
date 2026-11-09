@@ -1,0 +1,43 @@
+name: Rachel Telegram Bot 24/7 Cloud Runner
+
+on:
+  schedule:
+    # 매 5시간 40분마다 자동으로 새 클라우드 세션으로 이어달리기 실행
+    - cron: '10 */5 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: rachel-telegram-bot
+  cancel-in-progress: true
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore conversation memory cache
+        uses: actions/cache/restore@v4
+        with:
+          path: bot_memory.json
+          key: rachel-memory-${{ github.run_id }}
+          restore-keys: |
+            rachel-memory-
+
+      - name: Run Rachel Bot (5h 20m session)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ALLOWED_CHAT_ID: ${{ secrets.ALLOWED_CHAT_ID }}
+          MAX_RUN_SECONDS: "19000"
+        run: |
+          python3 telegram_bot.py
+
+      - name: Save conversation memory cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: bot_memory.json
+          key: rachel-memory-${{ github.run_id }}
