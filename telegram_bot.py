@@ -197,23 +197,23 @@ def send_message(token, chat_id, text):
 
 
 def check_proactive_message(env, token, mem):
-    """오전 9시(출근/업무 시작), 오후 12시 20분(점심), 오후 7시(퇴근/저녁)에 먼저 선톡을 보냅니다 (한국 시간 KST 기준)."""
+    """오전 9시(출근/업무 시작), 오후 12시 20분(점심), 오후 7시(퇴근/저녁)에 기존 대화 맥락을 이어받아 먼저 선톡을 보냅니다 (한국 시간 KST 기준)."""
     from datetime import timezone, timedelta
     kst = timezone(timedelta(hours=9))
     now = datetime.now(kst)
     today_str = now.strftime("%Y-%m-%d")
     slot = None
-    prompt = None
+    time_label = None
 
     if now.hour == 9 and 0 <= now.minute < 30:
         slot = f"{today_str}-morning"
-        prompt = "[SYSTEM: Text Dahye like a longtime bestie in the morning! Ask if she survived the morning commute or if work looks crazy today. Include 반말 Korean translation and 1 useful expression tip.]"
+        time_label = "Morning (around 9 AM)"
     elif now.hour == 12 and 20 <= now.minute < 50:
         slot = f"{today_str}-lunch"
-        prompt = "[SYSTEM: Text Dahye like a longtime bestie at lunchtime! Ask what delicious thing she's eating for lunch today or how her morning went. Include 반말 Korean translation and 1 useful expression tip.]"
+        time_label = "Lunchtime (around 12:30 PM)"
     elif now.hour == 19 and 0 <= now.minute < 30:
         slot = f"{today_str}-evening"
-        prompt = "[SYSTEM: Text Dahye like a longtime bestie in the evening! Ask if she finally got off work (or called it a day) and tell her she worked hard today. Include 반말 Korean translation and 1 useful expression tip.]"
+        time_label = "Evening (around 7 PM)"
 
     if not slot:
         return
@@ -224,11 +224,25 @@ def check_proactive_message(env, token, mem):
         last_sent = mem.get("last_proactive", {}).get(chat_id, "")
         if last_sent != slot:
             history = mem.get("history", {}).get(chat_id, [])
+            if history:
+                recent_summary = "\n".join([f"{m['role']}: {m['text'].splitlines()[0]}" for m in history[-6:]])
+                prompt = (
+                    f"[SYSTEM: It is now {time_label}. You are texting Dahye first! "
+                    f"Read your recent conversation with Dahye below, and naturally follow up on what you guys talked about earlier "
+                    f"(e.g. how she's feeling after taking painkillers/cramps, who she was on the phone with, or how her work/evening is going) "
+                    f"instead of sending a generic greeting! Keep the exact same output format with --- and 💬/💡/📌.]\n"
+                    f"Recent chat context:\n{recent_summary}"
+                )
+            else:
+                prompt = (
+                    f"[SYSTEM: It is now {time_label}. Text Dahye first like a longtime bestie checking in on her day! "
+                    f"Keep the exact same output format with --- and 💬/💡/📌.]"
+                )
             reply = generate_reply(env, history, prompt)
             send_message(token, chat_id, reply)
             mem.setdefault("last_proactive", {})[chat_id] = slot
             history.append({"role": "assistant", "text": reply})
-            mem.setdefault("history", {})[chat_id] = history[-20:]
+            mem.setdefault("history", {})[chat_id] = history[-30:]
             save_memory(mem)
 
 
