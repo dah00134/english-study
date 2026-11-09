@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="영어 단어장" />
-  <title>영어 단어장</title>
+  <meta name="apple-mobile-web-app-title" content="영어 트레이닝" />
+  <title>영어 트레이닝</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <style>
     :root {
@@ -21,6 +21,9 @@
       --primary: #2563eb;
       --primary-soft: #eff6ff;
       --primary-border: #bfdbfe;
+      --success: #16a34a;
+      --success-soft: #f0fdf4;
+      --success-border: #bbf7d0;
       --yt-red: #dc2626;
       --yt-soft: #fef2f2;
       --yt-border: #fecaca;
@@ -53,7 +56,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Bar */
     header {
       background: var(--surface);
       position: sticky;
@@ -72,7 +74,7 @@
 
     .mode-segmented {
       display: grid;
-      grid-template-columns: 1fr 1fr 1.15fr;
+      grid-template-columns: 1fr 1fr 1fr 1.1fr;
       width: 100%;
       background: #f1f5f9;
       padding: 3px;
@@ -83,9 +85,9 @@
       border: none;
       background: transparent;
       color: var(--text-secondary);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      padding: 7px 8px;
+      padding: 7px 4px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -97,7 +99,7 @@
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
     }
 
-    /* Category Filter Chips */
+    /* Filter Chips */
     .filter-scroll {
       display: flex;
       gap: 6px;
@@ -113,7 +115,7 @@
       white-space: nowrap;
       padding: 7px 13px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       background: var(--surface-sub);
       color: var(--text-secondary);
@@ -128,7 +130,6 @@
       border-color: var(--text-primary);
     }
 
-    /* Main Content */
     main {
       flex: 1;
       padding: 16px;
@@ -155,7 +156,7 @@
       justify-content: space-between;
       min-height: 360px;
       cursor: pointer;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: border-color 0.2s ease;
     }
 
     .flashcard.revealed {
@@ -193,11 +194,10 @@
       font-weight: 700;
       color: var(--text-muted);
       margin-bottom: 6px;
-      letter-spacing: 0.02em;
     }
 
     .ko-sentence {
-      font-size: 1.32rem;
+      font-size: 1.3rem;
       font-weight: 800;
       line-height: 1.48;
       color: var(--text-primary);
@@ -245,12 +245,11 @@
     }
 
     .en-sentence {
-      font-size: 1.28rem;
+      font-size: 1.26rem;
       font-weight: 800;
       color: var(--primary);
       line-height: 1.42;
       margin-bottom: 14px;
-      letter-spacing: -0.01em;
     }
 
     .audio-bar {
@@ -273,11 +272,9 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: background 0.15s, transform 0.1s;
     }
 
     .audio-btn:active {
-      transform: scale(0.97);
       background: #e2e8f0;
     }
 
@@ -316,6 +313,83 @@
 
     .flashcard.revealed .reveal-prompt {
       display: none;
+    }
+
+    /* Practice / Speaking Quiz Mode */
+    .quiz-view {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .quiz-input {
+      width: 100%;
+      border: 1.5px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.98rem;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .quiz-input:focus {
+      border-color: var(--primary);
+    }
+
+    .quiz-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .quiz-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface-sub);
+      color: var(--text-primary);
+      padding: 11px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .quiz-btn.primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .quiz-feedback {
+      display: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .quiz-feedback.correct {
+      display: block;
+      background: var(--success-soft);
+      border: 1px solid var(--success-border);
+      color: #14532d;
+    }
+
+    .quiz-feedback.check {
+      display: block;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      color: var(--text-primary);
     }
 
     /* List Mode */
@@ -431,7 +505,6 @@
       align-items: flex-start;
       gap: 10px;
       background: var(--surface);
-      cursor: pointer;
     }
 
     .video-title-wrap {
@@ -518,12 +591,6 @@
       line-height: 1.35;
     }
 
-    .s-note {
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      margin-top: 3px;
-    }
-
     .s-speak-btn {
       border: 1px solid var(--border);
       background: var(--surface-sub);
@@ -539,11 +606,7 @@
       justify-content: center;
     }
 
-    .s-speak-btn:active {
-      background: #e2e8f0;
-    }
-
-    /* Fixed Bottom Control Bar (Flashcard Mode) */
+    /* Fixed Bottom Control Bar */
     .bottom-dock {
       position: fixed;
       bottom: 0;
@@ -574,22 +637,12 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
-      transition: all 0.15s ease;
-    }
-
-    .dock-btn:active {
-      transform: scale(0.97);
-      background: #f1f5f9;
     }
 
     .dock-btn-primary {
       background: var(--primary);
       color: #ffffff;
       border-color: var(--primary);
-    }
-
-    .dock-btn-primary:active {
-      background: #1d4ed8;
     }
   </style>
 </head>
@@ -599,23 +652,25 @@
     <div class="top-bar">
       <div class="mode-segmented">
         <button class="seg-btn active" id="tabFlash" onclick="switchMode('flash')">카드 학습</button>
+        <button class="seg-btn" id="tabQuiz" onclick="switchMode('quiz')">실전 테스트</button>
         <button class="seg-btn" id="tabList" onclick="switchMode('list')">전체 목록</button>
-        <button class="seg-btn" id="tabShorts" onclick="switchMode('shorts')">📺 유튜브 정리</button>
+        <button class="seg-btn" id="tabShorts" onclick="switchMode('shorts')">📺 유튜브</button>
       </div>
     </div>
 
     <div class="filter-scroll" id="categoryChips">
-      <button class="chip active" data-cat="day3">Day 3 (오늘)</button>
-      <button class="chip" data-cat="day2">Day 2</button>
-      <button class="chip" data-cat="day1">Day 1</button>
-      <button class="chip" data-cat="biz">비즈니스 패턴</button>
-      <button class="chip" data-cat="phrasal">필수 구동사</button>
-      <button class="chip" data-cat="travel">여행·스몰토크</button>
-      <button class="chip" data-cat="all">전체</button>
+      <button class="chip active" data-cat="day1">Day 1 (진행/회신)</button>
+      <button class="chip" data-cat="day2">Day 2 (일정/문의)</button>
+      <button class="chip" data-cat="day3">Day 3 (마무리/당부)</button>
+      <button class="chip" data-cat="day4">Day 4 (의견/이해)</button>
+      <button class="chip" data-cat="day5">Day 5 (요청/제안)</button>
+      <button class="chip" data-cat="day6">Day 6 (문제해결)</button>
+      <button class="chip" data-cat="day7">Day 7 (스몰토크)</button>
+      <button class="chip" data-cat="all">전체 문장</button>
     </div>
 
     <div class="shorts-part-filter" id="shortsPartChips" style="display:none;">
-      <button class="part-chip active" data-part="all" onclick="filterShortsPart('all', this)">전체 (24개 영상)</button>
+      <button class="part-chip active" data-part="all" onclick="filterShortsPart('all', this)">전체 (30개 영상)</button>
       <button class="part-chip" data-part="p1" onclick="filterShortsPart('p1', this)">Part 1. 1초 앞대가리 패턴</button>
       <button class="part-chip" data-part="p2" onclick="filterShortsPart('p2', this)">Part 2. 해외여행 회화</button>
       <button class="part-chip" data-part="p3" onclick="filterShortsPart('p3', this)">Part 3. 필수 구동사</button>
@@ -629,31 +684,52 @@
       <div class="flashcard" id="flashcard" onclick="toggleReveal()">
         <div>
           <div class="card-header">
-            <span class="card-tag" id="cardTag">Day 3</span>
+            <span class="card-tag" id="cardTag">Day 1</span>
             <span class="card-index" id="cardCounter">1 / 6</span>
           </div>
 
           <div class="question-section">
             <div class="ko-label">한국어 문장</div>
-            <div class="ko-sentence" id="koSentence">나 이제 막 이메일을 보내려던 참이야.</div>
-            <div class="hint-pill" id="hintBox">💡 힌트: I'm about to ~</div>
+            <div class="ko-sentence" id="koSentence"></div>
+            <div class="hint-pill" id="hintBox"></div>
           </div>
 
           <div class="answer-section">
             <div class="en-label">영어 표현</div>
-            <div class="en-sentence" id="enSentence">I'm about to send the email.</div>
+            <div class="en-sentence" id="enSentence"></div>
 
             <div class="audio-bar" onclick="event.stopPropagation()">
               <button class="audio-btn" onclick="speakCurrent(0.96)">🔊 보통 속도</button>
               <button class="audio-btn" onclick="speakCurrent(0.75)">🐢 느린 속도</button>
             </div>
 
-            <div class="tip-box" id="tipText">상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 최고의 패턴입니다.</div>
+            <div class="tip-box" id="tipText"></div>
             <div class="before-box" id="beforeBox" style="display:none;"></div>
           </div>
         </div>
 
         <div class="reveal-prompt">👆 카드를 터치해서 정답 확인하기</div>
+      </div>
+    </div>
+
+    <!-- Self Quiz / Speaking Practice View -->
+    <div class="quiz-view" id="quizView">
+      <div class="quiz-card">
+        <div class="card-header" style="margin-bottom:4px;">
+          <span class="card-tag" id="qTag">Day 1 실전 테스트</span>
+          <span class="card-index" id="qCounter">1 / 6</span>
+        </div>
+        <div class="ko-sentence" id="qKo" style="margin-bottom:6px;"></div>
+        <div class="hint-pill" id="qHint"></div>
+
+        <input type="text" class="quiz-input" id="quizInput" placeholder="영어로 직접 입력하거나 음성 입력(🎤) 해보세요" autocomplete="off" />
+
+        <div class="quiz-btn-row">
+          <button class="quiz-btn primary" onclick="checkQuizAnswer()">정답 비교하기</button>
+          <button class="quiz-btn" onclick="speakCurrent(0.95)">🔊 정답 발음 듣기</button>
+        </div>
+
+        <div class="quiz-feedback" id="quizFeedback"></div>
       </div>
     </div>
 
@@ -664,146 +740,30 @@
     <div class="shorts-view" id="shortsView"></div>
   </main>
 
-  <!-- Bottom Navigation Bar for Flashcard Mode -->
+  <!-- Bottom Navigation Bar -->
   <div class="bottom-dock" id="bottomDock">
     <button class="dock-btn" onclick="prevCard()">‹ 이전 문장</button>
     <button class="dock-btn dock-btn-primary" onclick="nextCard()">다음 문장 ›</button>
   </div>
 
   <script>
+    // Self-paced 7-Day Complete Business & Daily Speaking Curriculum
     const cardsData = [
-      // Day 3
-      {
-        id: "d3-1",
-        cat: "day3",
-        tag: "Day 3 · 완벽 정답",
-        ko: "나 이제 막 이메일을 보내려던 참이야.",
-        hint: "앞머리: I'm about to ~",
-        en: "I'm about to send the email.",
-        tip: "상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 패턴입니다."
-      },
-      {
-        id: "d3-2",
-        cat: "day3",
-        tag: "Day 3 · 스펠링 주의",
-        ko: "혹시 모르니까, 꼭 두 번(재차) 확인해 주세요.",
-        hint: "앞머리: Just in case, make sure to ~",
-        en: "Just in case, make sure to double-check.",
-        tip: "어순은 100점! '두 번'은 double (d-o-u-b-l-e) 스펠링만 챙겨주세요.",
-        before: "내 답안: Just in case Make sure to duble-check."
-      },
-      {
-        id: "d3-3",
-        cat: "day3",
-        tag: "Day 3 · 완벽 정답",
-        ko: "오늘은 이쯤에서 마무리합시다.",
-        hint: "앞머리: Let's wrap it up ~",
-        en: "Let's wrap it up for today.",
-        tip: "회의나 업무를 끝낼 때 finish 대신 'wrap it up (포장하듯 깔끔히 마무리하다)'을 쓰면 훨씬 자연스럽습니다."
-      },
-      {
-        id: "d3-4",
-        cat: "day3",
-        tag: "Day 3 · 퇴근 표현",
-        ko: "전 오늘 업무는 여기까지 할게요 (퇴근할게요).",
-        hint: "앞머리: I'm gonna call it ~",
-        en: "I'm gonna call it a day.",
-        tip: "Let's wrap it up과 세트로 매일 쓰이는 원어민 퇴근 인사입니다."
-      },
-      {
-        id: "d3-5",
-        cat: "day3",
-        tag: "Day 2 복습 · d 주의",
-        ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
-        hint: "앞머리: We're supposed to ~",
-        en: "We're supposed to start the project tomorrow.",
-        tip: "발음은 '서포즈투'로 들리지만, 글로 쓸 때는 꼭 supposed (d 포함)로 적어주세요!",
-        before: "내 답안: We're suppose to start the project tomorrorw."
-      },
-      {
-        id: "d3-6",
-        cat: "day3",
-        tag: "Day 3 · 응용",
-        ko: "나 이제 막 회의에 들어가려던 참이야.",
-        hint: "앞머리: I'm about to ~",
-        en: "I'm about to join the meeting.",
-        tip: "회의에 참석하다/들어가다는 'join the meeting'을 가장 많이 씁니다."
-      },
-
-      // Day 2
-      {
-        id: "d2-1",
-        cat: "day2",
-        tag: "Day 2 · 전치사 주의",
-        ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
-        hint: "앞머리: We're supposed to ~ (tomorrow 앞에 at 금지)",
-        en: "We're supposed to start the project tomorrow.",
-        tip: "today, tomorrow, yesterday, next week 앞에는 at, on, in 같은 전치사를 붙이지 않습니다.",
-        before: "내 첫 문장: We're supposed to start the project at tomorrow."
-      },
-      {
-        id: "d2-2",
-        cat: "day2",
-        tag: "Day 2 · 완벽 정답",
-        ko: "혹시 그분 전화번호 아시나요?",
-        hint: "앞머리: Do you happen to ~?",
-        en: "Do you happen to know his phone number?",
-        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 질문이 됩니다."
-      },
-      {
-        id: "d2-3",
-        cat: "day2",
-        tag: "Day 2 · 제안 & 구동사",
-        ko: "언제든 편하게 연락 주세요. 이 일정을 같이 검토해 봅시다.",
-        hint: "앞머리: Feel free to ~ / Let's go over ~",
-        en: "Feel free to call me anytime. Let's go over this schedule.",
-        tip: "'~해 봅시다'는 Let's ~! '검토하다'는 회화에서 구동사 'go over(훑어보다)'를 훨씬 자주 씁니다.",
-        before: "내 문장: we're supposed to review this schedule."
-      },
-      {
-        id: "d2-4",
-        cat: "day2",
-        tag: "Day 2 · 복습 교정",
-        ko: "나 지금 보고서 작업 중이야. 이따가 다시 연락할게.",
-        hint: "앞머리: I'm working on ~",
-        en: "I'm working on a report. I'll get back to you later.",
-        tip: "report(보고서)는 사물이므로 'working on a report'라고 해주는 게 가장 자연스럽습니다.",
-        before: "내 문장: I'm in the middle of a report. → working on 추가!"
-      },
-      {
-        id: "d2-5",
-        cat: "day2",
-        tag: "Day 2 · 응용",
-        ko: "제가 5시까지 그 파일을 보내기로 되어 있어요.",
-        hint: "앞머리: I'm supposed to ~ (~까지: by 5)",
-        en: "I'm supposed to send the file by 5.",
-        tip: "마감 기한 '~까지'는 전치사 by를 씁니다."
-      },
-      {
-        id: "d2-6",
-        cat: "day2",
-        tag: "Day 2 · 응용",
-        ko: "혹시 지금 시간 좀 있으신가요?",
-        hint: "앞머리: Do you happen to ~?",
-        en: "Do you happen to have time now?",
-        tip: "동료나 상사에게 조심스럽게 시간을 내달라고 물을 때 쓰는 표현입니다."
-      },
-
-      // Day 1
+      // Day 1: 진행 상황 공유 & 회신 약속
       {
         id: "d1-1",
         cat: "day1",
-        tag: "Day 1 · 핵심 교정",
+        tag: "Day 1 · 바쁜 상황 알리기",
         ko: "나 지금 뭐 좀 처리하는 중이야. 이따가 다시 연락할게.",
-        hint: "앞머리: I'm in the middle of ~ / I'll ~",
+        hint: "앞머리: I'm in the middle of ~ / I'll get back ~",
         en: "I'm in the middle of something. I'll get back to you later.",
-        tip: "something 앞에는 'a'를 붙이지 않습니다! '다시 연락하다'는 전화/메일 모두 get back to you!",
+        tip: "something 앞에는 'a'를 붙이지 않습니다! '다시 연락/답변하다'는 전화·메일 모두 get back to you!",
         before: "내 첫 문장: I'm in the middle of a something."
       },
       {
         id: "d1-2",
         cat: "day1",
-        tag: "Day 1 · 핵심 교정",
+        tag: "Day 1 · 정중한 거절/양해",
         ko: "죄송하지만 제가 지금은 한창 회의 중입니다.",
         hint: "앞머리: I'm afraid ~ / I'm in the middle of ~",
         en: "I'm afraid I'm in the middle of a meeting right now.",
@@ -812,7 +772,7 @@
       {
         id: "d1-3",
         cat: "day1",
-        tag: "Day 1 · 핵심 교정",
+        tag: "Day 1 · 업무 진행 & 회신",
         ko: "제가 지금 그 이슈를 확인(작업) 중입니다. 곧 다시 답변드릴게요.",
         hint: "앞머리: I'm working on ~ / I'll get back ~",
         en: "I'm working on the issue. I'll get back to you soon.",
@@ -822,7 +782,7 @@
       {
         id: "d1-4",
         cat: "day1",
-        tag: "Day 1 · 진단 교정",
+        tag: "Day 1 · 일정 연기",
         ko: "죄송하지만 그 일정은 다음 주로 미뤄야(연기해야) 할 것 같아요.",
         hint: "앞머리: I'm afraid we have to ~ (미루다: put off)",
         en: "I'm afraid we have to put off the schedule until next week.",
@@ -832,9 +792,9 @@
       {
         id: "d1-5",
         cat: "day1",
-        tag: "Day 1 · 진단 교정",
+        tag: "Day 1 · 해결책 찾기",
         ko: "제가 어떻게든 해결책을 찾아볼게요.",
-        hint: "앞머리: I'll figure ~",
+        hint: "앞머리: I'll figure out ~",
         en: "I'll figure out a solution.",
         tip: "search는 단순 검색! 머리를 굴려 해결책을 찾아내다는 구동사 'figure out'을 씁니다.",
         before: "내 첫 문장: I search the solution."
@@ -842,116 +802,294 @@
       {
         id: "d1-6",
         cat: "day1",
-        tag: "Day 1 · 응용",
+        tag: "Day 1 · 보고서 작성 중",
         ko: "나 지금 보고서 작성하는 중이야.",
-        hint: "앞머리: I'm in the middle of working on ~",
-        en: "I'm in the middle of working on a report.",
-        tip: "in the middle of 뒤에 동사를 넣을 땐 -ing 형태(working on)로 이어줍니다."
+        hint: "앞머리: I'm working on ~ (또는 I'm in the middle of working on ~)",
+        en: "I'm working on a report.",
+        tip: "report(보고서)는 사물이므로 'working on a report'라고 표현하는 것이 가장 자연스럽습니다."
       },
 
-      // Business Patterns
+      // Day 2: 일정 확인 & 정중한 질문/안내
       {
-        id: "biz-1",
-        cat: "biz",
-        tag: "비즈니스 · 약속/예정",
-        ko: "우린 다음 주에 가기로 되어 있어. / 나 6시까지 거기 가야 해.",
-        hint: "앞머리: We're supposed to ~ / I'm supposed to ~",
-        en: "We're supposed to go next week. / I'm supposed to be there by 6.",
-        tip: "규칙이나 약속으로 '~하기로 되어 있다'고 말할 때 쓰는 1순위 패턴입니다."
+        id: "d2-1",
+        cat: "day2",
+        tag: "Day 2 · 예정된 일정",
+        ko: "우리 내일 그 프로젝트를 시작하기로 되어 있어.",
+        hint: "앞머리: We're supposed to ~ (tomorrow 앞에 at 금지)",
+        en: "We're supposed to start the project tomorrow.",
+        tip: "today, tomorrow, yesterday, next week 앞에는 at, on, in 같은 전치사를 붙이지 않습니다.",
+        before: "내 답안: We're suppose to start the project at tomorrow."
       },
       {
-        id: "biz-2",
-        cat: "biz",
-        tag: "비즈니스 · 의견 조율",
-        ko: "하룻밤 자면서 곰곰이 생각해 볼게.",
-        hint: "앞머리: I'm gonna sleep ~ / Let me think ~",
-        en: "I'm gonna sleep on it. / Let me think it over.",
-        tip: "중요한 결정을 바로 내리지 않고 '신중히 고민해 보겠다'고 할 때 쓰는 표현입니다."
+        id: "d2-2",
+        cat: "day2",
+        tag: "Day 2 · 정중한 문의",
+        ko: "혹시 그분 전화번호 아시나요?",
+        hint: "앞머리: Do you happen to ~?",
+        en: "Do you happen to know his phone number?",
+        tip: "Do you ~? 사이에 'happen to'만 넣으면 '혹시 ~하시나요?'라는 아주 정중한 질문이 됩니다."
       },
       {
-        id: "biz-3",
-        cat: "biz",
-        tag: "비즈니스 · 이해/공감",
-        ko: "네 말뜻(요점)이 뭔지 알겠어. / 내 말이 바로 그 말이야.",
+        id: "d2-3",
+        cat: "day2",
+        tag: "Day 2 · 안내 & 검토 제안",
+        ko: "언제든 편하게 연락 주세요. 이 일정을 같이 검토해 봅시다.",
+        hint: "앞머리: Feel free to ~ / Let's go over ~",
+        en: "Feel free to call me anytime. Let's go over this schedule.",
+        tip: "'~해 봅시다'는 Let's ~! '검토하다'는 회화에서 구동사 'go over(훑어보다)'를 훨씬 자주 씁니다."
+      },
+      {
+        id: "d2-4",
+        cat: "day2",
+        tag: "Day 2 · 마감 기한",
+        ko: "제가 5시까지 그 파일을 보내기로 되어 있어요.",
+        hint: "앞머리: I'm supposed to ~ (~까지: by 5)",
+        en: "I'm supposed to send the file by 5.",
+        tip: "마감 기한 '~까지'는 전치사 by를 씁니다."
+      },
+      {
+        id: "d2-5",
+        cat: "day2",
+        tag: "Day 2 · 시간 문의",
+        ko: "혹시 지금 시간 좀 있으신가요?",
+        hint: "앞머리: Do you happen to ~?",
+        en: "Do you happen to have time now?",
+        tip: "동료나 상사에게 조심스럽게 시간을 내달라고 물을 때 쓰는 표현입니다."
+      },
+
+      // Day 3: 임박한 행동 & 당부/마무리
+      {
+        id: "d3-1",
+        cat: "day3",
+        tag: "Day 3 · 임박한 행동",
+        ko: "나 이제 막 이메일을 보내려던 참이야.",
+        hint: "앞머리: I'm about to ~",
+        en: "I'm about to send the email.",
+        tip: "상사나 동료가 '그거 했어?'라고 물을 때 '마침 지금 막 ~하려던 참이에요!'라고 답하는 패턴입니다."
+      },
+      {
+        id: "d3-2",
+        cat: "day3",
+        tag: "Day 3 · 대비 & 당부",
+        ko: "혹시 모르니까, 꼭 두 번(재차) 확인해 주세요.",
+        hint: "앞머리: Just in case, make sure to ~",
+        en: "Just in case, make sure to double-check.",
+        tip: "실수를 방지할 때 쓰는 필수 조합! double-check 스펠링(d-o-u-b-l-e)을 기억하세요."
+      },
+      {
+        id: "d3-3",
+        cat: "day3",
+        tag: "Day 3 · 회의 마무리",
+        ko: "오늘은 이쯤에서 마무리합시다.",
+        hint: "앞머리: Let's wrap it up ~",
+        en: "Let's wrap it up for today.",
+        tip: "회의나 업무를 끝낼 때 finish 대신 'wrap it up (포장하듯 깔끔히 마무리하다)'을 씁니다."
+      },
+      {
+        id: "d3-4",
+        cat: "day3",
+        tag: "Day 3 · 퇴근 인사",
+        ko: "전 오늘 업무는 여기까지 할게요 (퇴근할게요).",
+        hint: "앞머리: I'm gonna call it ~",
+        en: "I'm gonna call it a day.",
+        tip: "Let's wrap it up과 세트로 매일 쓰이는 원어민 퇴근 인사입니다."
+      },
+      {
+        id: "d3-5",
+        cat: "day3",
+        tag: "Day 3 · 회의 참석",
+        ko: "나 이제 막 회의에 들어가려던 참이야.",
+        hint: "앞머리: I'm about to join ~",
+        en: "I'm about to join the meeting.",
+        tip: "회의에 들어가다는 enter보다 'join the meeting'을 가장 많이 씁니다."
+      },
+
+      // Day 4: 상대 의도 확인 & 공감/이해하기
+      {
+        id: "d4-1",
+        cat: "day4",
+        tag: "Day 4 · 상대 의도 재확인",
+        ko: "네 말은 우리가 일정을 바꿔야 한다는 거지?",
+        hint: "앞머리: Are you saying (that) we need to ~?",
+        en: "Are you saying we need to change the schedule?",
+        tip: "상대방의 말을 요약해서 '즉 ~라는 말씀이시죠?'라고 되물을 때 Are you saying ~?을 씁니다."
+      },
+      {
+        id: "d4-2",
+        cat: "day4",
+        tag: "Day 4 · 요점 이해",
+        ko: "무슨 말씀하시는지(요점이 뭔지) 알겠습니다. 내 말이 바로 그 말이에요.",
         hint: "앞머리: I get your ~ / That's what ~",
-        en: "I get your point. / That's what I mean.",
-        tip: "get은 마음의 이동(=이해하다)! 상대방의 요점을 이해했을 때 'I get your point.'"
+        en: "I get your point. That's what I mean.",
+        tip: "I understand보다 원어민이 회의에서 훨씬 자주 쓰는 공감 표현이 'I get your point'입니다."
+      },
+      {
+        id: "d4-3",
+        cat: "day4",
+        tag: "Day 4 · 이유 설명",
+        ko: "그래서 제가 아까 당신에게 전화했던 거예요.",
+        hint: "앞머리: That's why I ~",
+        en: "That's why I called you earlier.",
+        tip: "Because 대신 문장 맨 앞에 'That's why ~(그래서 ~한 거다)'를 쓰면 말하기가 훨씬 쉬워집니다."
+      },
+      {
+        id: "d4-4",
+        cat: "day4",
+        tag: "Day 4 · 눈치/파악",
+        ko: "요즘 많이 바쁘신 게 눈에 보이네요(알겠네요).",
+        hint: "앞머리: I can tell ~",
+        en: "I can tell you're very busy these days.",
+        tip: "여기서 tell은 '말하다'가 아니라 '보고 알다/티가 나다'라는 뜻입니다."
+      },
+      {
+        id: "d4-5",
+        cat: "day4",
+        tag: "Day 4 · 완곡한 부인",
+        ko: "그 아이디어에 동의하지 않는다는 건 아니에요.",
+        hint: "앞머리: It's not that I don't ~",
+        en: "It's not that I don't agree with the idea.",
+        tip: "오해를 풀며 '~라는 건 아니야'라고 말할 때 It's not that ~으로 시작합니다."
       },
 
-      // Phrasal Verbs
+      // Day 5: 정중한 요청 & 신중한 의사결정
       {
-        id: "phr-1",
-        cat: "phrasal",
-        tag: "구동사 · OVER",
-        ko: "이 자료 같이 검토해 봅시다.",
-        hint: "앞머리: Let's go ~",
-        en: "Let's go over this.",
-        tip: "go over: 위를 넘어가며 훑어보다 → 서류나 일정을 '검토하다/점검하다'."
+        id: "d5-1",
+        cat: "day5",
+        tag: "Day 5 · 사유 말하기",
+        ko: "사실은(문제는), 우리가 시간이 충분하지 않아요.",
+        hint: "앞머리: The thing is, ~",
+        en: "The thing is, we don't have enough time.",
+        tip: "본론이나 진짜 이유/문제를 꺼낼 때 'The thing is ~'로 운을 떼면 아주 자연스럽습니다."
       },
       {
-        id: "phr-2",
-        cat: "phrasal",
-        tag: "구동사 · DOWN",
-        ko: "핵심만 요약해 봅시다. / 선택지를 좀 추려(좁혀) 봅시다.",
-        hint: "요약하다: boil down / 좁히다: narrow down",
-        en: "Let's boil it down. / Let's narrow down the list.",
-        tip: "boil down(졸여서 요약하다), narrow down(폭을 좁혀 압축하다), drill down(본질을 파헤치다)."
+        id: "d5-2",
+        cat: "day5",
+        tag: "Day 5 · 신중한 보류",
+        ko: "그 제안에 대해 좀 더 곰곰이 생각해 볼게요. (하룻밤 고민해 볼게요.)",
+        hint: "앞머리: Let me think it ~ / I'll sleep ~",
+        en: "Let me think it over. (I'll sleep on it.)",
+        tip: "즉답하기 어려운 제안을 받았을 때 시간을 벌 수 있는 고급 비즈니스 표현입니다."
       },
       {
-        id: "phr-3",
-        cat: "phrasal",
-        tag: "구동사 · ON / OFF",
-        ko: "내가 그거 잘 지켜볼게. / 몇 시에 퇴근하세요?",
-        hint: "지켜보다: keep an eye on / 퇴근하다: get off work",
-        en: "I'm gonna keep an eye on it. / What time do you get off work?",
-        tip: "ON은 접촉/지속(시선을 붙여두다), OFF는 분리(직장에서 분리되어 퇴근하다)."
+        id: "d5-3",
+        cat: "day5",
+        tag: "Day 5 · 불필요 안내",
+        ko: "지금 바로 답장하실 필요는 없어요.",
+        hint: "앞머리: You don't have to ~ (또는 There's no need to ~)",
+        en: "You don't have to reply right now.",
+        tip: "상대방의 부담을 덜어줄 때 'You don't have to ~ (~할 필요 없어요)'를 씁니다."
       },
       {
-        id: "phr-4",
-        cat: "phrasal",
-        tag: "구동사 · UP",
-        ko: "그 얘기는 나중에 꺼낼게. / 내가 그거 꼭 만회(보상)할게.",
-        hint: "꺼내다: bring up / 만회하다: make up for",
-        en: "I'm gonna bring it up later. / I'll make up for it.",
-        tip: "bring up(화제를 위로 꺼내다), make up for(부족한 걸 완전히 채워 만회/보상하다)."
+        id: "d5-4",
+        cat: "day5",
+        tag: "Day 5 · 핵심 요약",
+        ko: "핵심만 요약해 봅시다. 선택지를 좀 좁혀 봅시다.",
+        hint: "요약하다: boil it down / 좁히다: narrow down",
+        en: "Let's boil it down. Let's narrow down the options.",
+        tip: "회의가 길어질 때 결론을 내리기 위해 쓰는 필수 구동사 2가지입니다."
+      },
+      {
+        id: "d5-5",
+        cat: "day5",
+        tag: "Day 5 · 계획 고수",
+        ko: "원래 계획을 그대로 고수합시다(유지합시다).",
+        hint: "앞머리: Let's stick to ~",
+        en: "Let's stick to the original plan.",
+        tip: "stick to는 자석처럼 딱 붙어서 계획이나 규칙을 지키고 고수한다는 뜻입니다."
       },
 
-      // Travel & Small Talk
+      // Day 6: 문제 발생 공유 & 후속 조치
       {
-        id: "trv-1",
-        cat: "travel",
-        tag: "스몰토크 · 동의",
-        ko: "나도 더 들어보고 싶어! / 나도 같이 갈래! (콜!)",
-        hint: "앞머리: I'm game to ~",
-        en: "I'm game to hear more. / I'm game to go with you.",
-        tip: "I'm game = 재밌는 일에 나도 끼겠다는 뜻으로 '완전 찬성/나도 할래!'"
+        id: "d6-1",
+        cat: "day6",
+        tag: "Day 6 · 문제 보고",
+        ko: "결제 시스템에 문제가 좀 생겼어요.",
+        hint: "앞머리: There's a problem with ~",
+        en: "There's a problem with the payment system.",
+        tip: "무언가 고장 나거나 오류가 났을 때 'There's a problem with + 명사'로 바로 말할 수 있습니다."
       },
       {
-        id: "trv-2",
-        cat: "travel",
-        tag: "스몰토크 · 성향",
-        ko: "나는 일찍 일어나는 편이야. / 난 아침을 거르는 편이야.",
+        id: "d6-2",
+        cat: "day6",
+        tag: "Day 6 · 모니터링 약속",
+        ko: "제가 그 상황을 계속 주의 깊게 지켜볼게요.",
+        hint: "앞머리: I'll keep an eye on ~",
+        en: "I'll keep an eye on the situation.",
+        tip: "시선(eye)을 계속 붙여두다(on) → 이슈나 데이터를 지속 모니터링하겠다는 뜻입니다."
+      },
+      {
+        id: "d6-3",
+        cat: "day6",
+        tag: "Day 6 · 추후 논의",
+        ko: "그 주제는 다음 회의 때 꺼내서 이야기할게요.",
+        hint: "앞머리: I'll bring it up ~",
+        en: "I'll bring it up at the next meeting.",
+        tip: "bring up은 안건이나 화제를 테이블 위로 꺼내어 올린다는 뜻입니다."
+      },
+      {
+        id: "d6-4",
+        cat: "day6",
+        tag: "Day 6 · 원인 파악",
+        ko: "세부 사항을 깊게 파헤쳐서 원인을 찾아봅시다.",
+        hint: "파헤치다: drill down into ~",
+        en: "Let's drill down into the details.",
+        tip: "드릴로 끝까지 구멍을 뚫듯 문제의 본질을 깊게 파고들 때 'drill down'을 씁니다."
+      },
+      {
+        id: "d6-5",
+        cat: "day6",
+        tag: "Day 6 · 만회/보상",
+        ko: "지연된 부분에 대해서는 저희가 꼭 만회하겠습니다.",
+        hint: "만회/보상하다: make up for ~",
+        en: "We'll make up for the delay.",
+        tip: "부족했던 부분을 완전히 채워 넣어 만회하거나 보상할 때 'make up for'를 씁니다."
+      },
+
+      // Day 7: 비즈니스 스몰토크 & 일상 소통
+      {
+        id: "d7-1",
+        cat: "day7",
+        tag: "Day 7 · 흔쾌히 찬성",
+        ko: "점심 같이 먹는 거 완전 좋아요! 저도 낄게요!",
+        hint: "앞머리: I'm game! / I'm up for ~",
+        en: "I'm game! I'm up for anything.",
+        tip: "동료가 점심이나 티타임을 제안할 때 '저도 좋아요/콜!'이라고 답하는 원어민 표현입니다."
+      },
+      {
+        id: "d7-2",
+        cat: "day7",
+        tag: "Day 7 · 기대감 표현",
+        ko: "다음 주에 직접 만나 뵙기를 손꼽아 기다리고 있어요!",
+        hint: "앞머리: I can't wait to ~",
+        en: "I can't wait to meet you in person next week.",
+        tip: "비즈니스 스몰토크에서 반가움과 기대감을 친근하게 표현할 때 최고입니다."
+      },
+      {
+        id: "d7-3",
+        cat: "day7",
+        tag: "Day 7 · 성향 말하기",
+        ko: "저는 오전에 커피를 마시는 편이에요.",
         hint: "앞머리: I tend to ~",
-        en: "I tend to wake up early. / I tend to skip breakfast.",
-        tip: "내 평소 습관이나 성향을 말할 때 'I tend to + 동사'를 쓰면 자연스럽습니다."
+        en: "I tend to drink coffee in the morning.",
+        tip: "스몰토크에서 내 습관이나 업무 스타일을 부드럽게 소개할 때 'I tend to ~'를 씁니다."
       },
       {
-        id: "trv-3",
-        cat: "travel",
-        tag: "퇴근/귀가 표현",
-        ko: "나 이제 집에 갈 거야 (집으로 출발할게).",
-        hint: "go home 대신 동사 head 쓰기",
-        en: "I'm gonna head home now.",
-        tip: "발음: '암거너 헤롬나우' (head home의 h가 약해져서 헤롬으로 연음됨)"
+        id: "d7-4",
+        cat: "day7",
+        tag: "Day 7 · 잠깐 자리 비우기",
+        ko: "저 커피만 한 잔 사 올게요. (간단히 뭐 좀 챙겨 먹을게요.)",
+        hint: "앞머리: I just need to ~ / I'm gonna grab ~",
+        en: "I just need to grab some coffee. (I'm gonna grab a bite.)",
+        tip: "잠깐 자리를 비우거나 가볍게 식사/커피를 챙길 때 buy/eat 대신 grab을 쓰면 자연스럽습니다."
       },
       {
-        id: "trv-4",
-        cat: "travel",
-        tag: "해외식당 리스닝",
-        ko: "아직 식사 중이신가요? / 식사는 다 괜찮으셨나요?",
-        hint: "식당 직원이 그릇 치우기 전에 묻는 말",
-        en: "Are you still working on that? / Did you find everything okay?",
-        tip: "식당에서 work on은 '음식을 먹는 중', find는 '경험해보고 느끼다'라는 뜻으로 쓰입니다."
+        id: "d7-5",
+        cat: "day7",
+        tag: "Day 7 · 컨디션 스몰토크",
+        ko: "왠지 모르게 오늘 좀 피곤하네요.",
+        hint: "앞머리: For some reason, I'm kind of ~",
+        en: "For some reason, I'm kind of tired today.",
+        tip: "For some reason(왠지 모르게) + kind of(약간/좀)를 합치면 원어민 스몰토크 문장이 완성됩니다."
       }
     ];
 
@@ -1270,7 +1408,7 @@
       }
     ];
 
-    let currentCategory = "day3";
+    let currentCategory = "day1";
     let currentIndex = 0;
     let currentShortsPart = "all";
 
@@ -1302,6 +1440,36 @@
         beforeEl.textContent = `✍️ ${card.before}`;
       } else {
         beforeEl.style.display = "none";
+      }
+
+      // Update Quiz view as well
+      document.getElementById("qCounter").textContent = `${currentIndex + 1} / ${list.length}`;
+      document.getElementById("qTag").textContent = card.tag;
+      document.getElementById("qKo").textContent = card.ko;
+      document.getElementById("qHint").textContent = `💡 ${card.hint}`;
+      document.getElementById("quizInput").value = "";
+      const fb = document.getElementById("quizFeedback");
+      fb.className = "quiz-feedback";
+      fb.innerHTML = "";
+    }
+
+    function checkQuizAnswer() {
+      const list = getFilteredCards();
+      const card = list[currentIndex];
+      if (!card) return;
+
+      const userVal = document.getElementById("quizInput").value.trim();
+      const fb = document.getElementById("quizFeedback");
+
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
+      const isExact = userVal && normalize(card.en).includes(normalize(userVal)) && normalize(userVal).length > 8;
+
+      if (isExact) {
+        fb.className = "quiz-feedback correct";
+        fb.innerHTML = `<strong>🎉 정확합니다!</strong><br>정답: <b>${card.en}</b><br><span style="font-size:0.82rem;">${card.tip}</span>`;
+      } else {
+        fb.className = "quiz-feedback check";
+        fb.innerHTML = `<strong>✅ 모범 정답과 비교해 보세요:</strong><br><b style="color:#2563eb;font-size:1.05rem;">${card.en}</b><br><span style="font-size:0.82rem;color:#475569;">${card.tip}</span>`;
       }
     }
 
@@ -1415,6 +1583,7 @@
 
     function switchMode(mode) {
       const fView = document.getElementById("flashcardView");
+      const qView = document.getElementById("quizView");
       const lView = document.getElementById("listView");
       const sView = document.getElementById("shortsView");
       const dock = document.getElementById("bottomDock");
@@ -1422,33 +1591,40 @@
       const partChips = document.getElementById("shortsPartChips");
 
       const tFlash = document.getElementById("tabFlash");
+      const tQuiz = document.getElementById("tabQuiz");
       const tList = document.getElementById("tabList");
       const tShorts = document.getElementById("tabShorts");
 
       tFlash.classList.remove("active");
+      tQuiz.classList.remove("active");
       tList.classList.remove("active");
       tShorts.classList.remove("active");
 
+      fView.style.display = "none";
+      qView.style.display = "none";
+      lView.style.display = "none";
+      sView.style.display = "none";
+
       if (mode === "flash") {
         fView.style.display = "flex";
-        lView.style.display = "none";
-        sView.style.display = "none";
         dock.style.display = "grid";
         catChips.style.display = "flex";
         partChips.style.display = "none";
         tFlash.classList.add("active");
+      } else if (mode === "quiz") {
+        qView.style.display = "flex";
+        dock.style.display = "grid";
+        catChips.style.display = "flex";
+        partChips.style.display = "none";
+        tQuiz.classList.add("active");
       } else if (mode === "list") {
-        fView.style.display = "none";
         lView.style.display = "flex";
-        sView.style.display = "none";
         dock.style.display = "none";
         catChips.style.display = "flex";
         partChips.style.display = "none";
         tList.classList.add("active");
         renderList();
       } else if (mode === "shorts") {
-        fView.style.display = "none";
-        lView.style.display = "none";
         sView.style.display = "flex";
         dock.style.display = "none";
         catChips.style.display = "none";
