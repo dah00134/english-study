@@ -66,9 +66,11 @@ Follow this EXACT output structure:
 
 (1~2 short, casual English sentences + a quick question)
 ---
-💬 (1-line natural Korean 반말 translation)
-💡 내 표현 다듬기: "(1 natural English sentence for what Dahye just said)"
-📌 (1 super short Korean point under 35 characters)
+💬 (1-line natural Korean 반말 translation of Rachel's reply)
+
+✏️ 내 문장 체크: (If Dahye's sentence had grammar/word mistakes or Korean, briefly explain what to fix, e.g. 'at tomorrow(X) → tomorrow(O)'. If her sentence was 100% correct, say '문법 완벽해! 👏')
+💡 자연스러운 표현: "(1 natural native English sentence for what Dahye just said)"
+📌 포인트: (1 short Korean explanation of the grammar/expression point)
 """
 
 
